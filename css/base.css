@@ -1,0 +1,273 @@
+/* ==========================================================================
+   base.css — 디자인 토큰 · 타이포 · 공통 유틸
+   Figma: 포트폴리오 페이지 2026ver (기준 1920×1080)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   웹폰트
+   Red Rose / Raleway / Montserrat → Google Fonts
+   Pretendard → jsDelivr CDN
+   -------------------------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Raleway:wght@300;400;500;700&family=Red+Rose:wght@700&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+:root {
+  /* --- 브랜드 / 섹션 테마 색 --- */
+  --c-about: #3350af;
+  --c-experience: #d86908;
+  --c-experience-light: #f59f54;
+  --c-skills: #5f08d8;
+  --c-projects: #469935;
+  --c-projects-alt: #53b440;
+  --c-projects-bg: #ebffe6;
+
+  /* --- 중립 --- */
+  --c-bg-sky: #dfecff;
+  --c-black: #000000;
+  --c-white: #ffffff;
+  --c-text: #000000;
+  --c-gray: #7d7d7d;
+  --c-gray-line: #929292;
+
+  /* --- 폰트 --- */
+  --font-display: "Red Rose", sans-serif;
+  --font-en: "Raleway", sans-serif;
+  --font-mont: "Montserrat", sans-serif;
+  --font-kr: "Pretendard Variable", Pretendard, -apple-system,
+    "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+
+  /* --- 타이포 스케일 (Figma 1920 기준 px) --- */
+  --fs-hero: 96px;
+  --fs-section-title: 68px;
+  --fs-56: 56px;
+  --fs-50: 50px;
+  --fs-48: 48px;
+  --fs-40: 40px;
+  --fs-36: 36px;
+  --fs-32: 32px;
+  --fs-28: 28px;
+  --fs-24: 24px;
+  --fs-20: 20px;
+  --fs-18: 18px;
+  --fs-16: 16px;
+
+  /* --- 레이아웃 --- */
+  --header-h: 80px;
+  --content-w: 1460px; /* 1920 - 230*2 */
+  --side-pad: 230px;
+
+  /* --- 형태 --- */
+  --radius-card: 20px;
+  --radius-pill: 50px;
+  --shadow-card: 0 5px 10px 0 rgba(51, 80, 175, 0.3);
+  --blur-card: blur(5px);
+
+  /* --- 모션 --- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 200ms;
+  --dur-base: 400ms;
+  --dur-slow: 800ms;
+}
+
+/* ==========================================================================
+   기본 요소
+   ========================================================================== */
+
+body {
+  background-color: var(--c-bg-sky);
+  color: var(--c-text);
+  font-family: var(--font-kr);
+  font-size: var(--fs-20);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+:focus-visible {
+  outline: 3px solid var(--c-about);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   레이아웃 유틸
+   ========================================================================== */
+
+/* Figma 컨텐츠 폭(1460px) 기준 중앙 정렬 컨테이너 */
+.container {
+  width: min(var(--content-w), calc(100% - 80px));
+  margin-inline: auto;
+}
+
+/* SVG 필터 정의 전용 — 화면에 보이지 않지만 참조는 가능해야 한다 */
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  padding: 12px 20px;
+  background: var(--c-black);
+  color: var(--c-white);
+  font-family: var(--font-en);
+  transform: translateY(-120%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   공통 컴포넌트
+   ========================================================================== */
+
+/*
+  섹션 타이틀 — 테마색 박스 + 네 모서리 셀렉션 핸들
+  --theme 커스텀 프로퍼티로 섹션마다 색을 바꾼다.
+*/
+.section-title {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* 좁은 화면에서 컨테이너를 넘지 않도록 */
+  max-width: 100%;
+  height: 120px;
+  /* 글자가 박스에 꽉 차 답답해 보이지 않도록 좌우 여백 확보 */
+  padding-inline: 52px;
+  background-color: var(--theme);
+  color: var(--c-white);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-section-title);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* 네 모서리의 20×20 흰 사각형 핸들 */
+.section-title::before,
+.section-title::after,
+.section-title > .section-title__handles::before,
+.section-title > .section-title__handles::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--c-white);
+  border: 2px solid var(--theme);
+  box-sizing: border-box;
+}
+
+.section-title::before {
+  top: -10px;
+  left: -10px;
+}
+.section-title::after {
+  top: -10px;
+  right: -10px;
+}
+.section-title > .section-title__handles::before {
+  bottom: -10px;
+  left: -10px;
+}
+.section-title > .section-title__handles::after {
+  bottom: -10px;
+  right: -10px;
+}
+
+/* 반투명 유리 카드 — 섹션마다 --theme-rgb 로 색 지정 */
+.glass-card {
+  background: rgba(var(--theme-rgb), 0.1);
+  backdrop-filter: var(--blur-card);
+  -webkit-backdrop-filter: var(--blur-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+/* 카드 안쪽 라벨 알약 (CAREER, EDUCATION, LICENCE) */
+.pill-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  height: 60px;
+  padding-inline: 20px;
+  background: var(--theme);
+  border-radius: var(--radius-pill);
+  color: var(--c-white);
+  font-family: var(--font-en);
+  font-weight: 500;
+  font-size: var(--fs-28);
+  letter-spacing: -0.02em;
+}
+
+.pill-label img {
+  width: 20px;
+  height: 20px;
+}
+
+/* ==========================================================================
+   스크롤 등장 애니메이션
+   ========================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  /* --reveal-delay 는 JS 가 그룹 순서대로 채워 넣는다 */
+  transition: opacity var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms),
+    transform var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/*
+  화면 밖으로 나갈 때는 지연 없이 곧바로 숨는다.
+  (지연을 두면 스크롤을 되돌릴 때 잔상이 남는다)
+*/
+.reveal:not(.is-visible) {
+  transition-delay: 0ms;
+}
+
+/* 등장 방향 변형 */
+.reveal--left  { transform: translateX(-40px); }
+.reveal--right { transform: translateX(40px); }
+.reveal--zoom  { transform: scale(0.94); }
+
+.reveal--left.is-visible,
+.reveal--right.is-visible,
+.reveal--zoom.is-visible {
+  transform: none;
+}
+
+/* 수동 지연 (그룹에 속하지 않는 개별 요소용) */
+.reveal[data-delay="1"] { --reveal-delay: 100ms; }
+.reveal[data-delay="2"] { --reveal-delay: 200ms; }
+.reveal[data-delay="3"] { --reveal-delay: 300ms; }
+.reveal[data-delay="4"] { --reveal-delay: 400ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

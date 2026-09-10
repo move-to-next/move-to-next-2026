@@ -1,0 +1,11 @@
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 편집기
+.vscode/
+.idea/
+
+# 작업용 임시 파일
+__*.html

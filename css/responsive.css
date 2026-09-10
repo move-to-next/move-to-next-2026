@@ -1,0 +1,609 @@
+/* ==========================================================================
+   responsive.css — 반응형
+
+   Figma 디자인은 데스크탑(1920) 1종만 존재하므로,
+   태블릿·모바일 레이아웃은 데스크탑 구조를 합리적으로 재구성한 것.
+
+   브레이크포인트
+     ~1720px  컨텐츠 축소 시작
+     ~1280px  2단 → 유연 배치
+     ~1023px  태블릿 (1단 전환 시작)
+     ~767px   모바일
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   ~1720px — 좌우 여백 축소
+   -------------------------------------------------------------------------- */
+@media (max-width: 1720px) {
+  .container {
+    width: calc(100% - 120px);
+  }
+
+  .experience__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skills__card {
+    grid-template-columns: minmax(0, 1fr) 60px minmax(0, 1fr);
+    padding-inline: 50px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ~1280px — 큰 타이포 축소, ABOUT 2단 유지하되 좁힘
+   -------------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  :root {
+    --fs-section-title: 54px;
+    --fs-40: 32px;
+    --fs-36: 28px;
+    --fs-28: 24px;
+    --fs-24: 20px;
+  }
+
+  .section-title {
+    height: 100px;
+    padding-inline: 42px;
+  }
+
+  .section {
+    padding-block: 90px;
+  }
+
+  .about__body {
+    grid-template-columns: 320px 1fr;
+    gap: 40px;
+  }
+
+  .about__card {
+    padding: 40px;
+  }
+
+  .marquee {
+    height: 72px;
+  }
+
+  .skills__card {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 40px;
+  }
+
+  /*
+    세로로 쌓이면 폭이 좁아 500px 고정 시 키가 길쭉해진다.
+    → 높이는 내용에 맡기고 키캡은 정사각 비율을 되찾는다.
+  */
+  .tool-window {
+    height: auto;
+  }
+
+  .keycaps {
+    grid-auto-rows: auto;
+    flex: none;
+  }
+
+  .keycap {
+    aspect-ratio: 110 / 100;
+    height: auto;
+  }
+
+  .tool-window__foot {
+    aspect-ratio: auto;
+    height: 96px;
+  }
+
+  /* 패널 내부는 absolute 이므로 높이를 고정해 둔다 */
+  .skills__panel {
+    height: 500px;
+  }
+
+  /* 화살표를 세로 방향으로 회전 */
+  .skills__arrow {
+    justify-self: center;
+    rotate: 90deg;
+  }
+
+  .skills__next {
+    height: auto;
+    padding: 40px 30px;
+  }
+
+  .contact__inner {
+    padding: 40px;
+    gap: 40px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ~1023px — 태블릿: 대부분 1단으로
+   -------------------------------------------------------------------------- */
+@media (max-width: 1023px) {
+  :root {
+    --fs-section-title: 44px;
+    --header-h: 64px;
+  }
+
+  .container {
+    width: calc(100% - 60px);
+  }
+
+  .section {
+    padding-block: 70px;
+  }
+
+  .section-title {
+    height: 84px;
+    padding-inline: 34px;
+  }
+
+  /* 컨텐츠와 가까워지므로 안쪽으로 당긴다 */
+  .section-dots {
+    left: 18px;
+  }
+
+  /* --- 네비게이션: 햄버거 메뉴로 전환 --- */
+  .nav-toggle {
+    display: block;
+  }
+
+  /* 헤더가 투명이므로 열린 메뉴는 자체 배경을 가진다 */
+  .site-nav {
+    position: fixed;
+    inset: var(--header-h) 0 auto 0;
+    background: var(--c-black);
+    /* 닫힌 상태 */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--dur-base) var(--ease-out);
+  }
+
+  /* 메뉴가 열려 있는 동안에는 헤더도 불투명하게 */
+  .site-header:has(.site-nav.is-open) {
+    background: var(--c-black);
+    border-bottom-color: transparent;
+  }
+
+  .site-nav.is-open {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .site-nav__list {
+    flex-direction: column;
+    gap: 0;
+    padding: 10px 0 20px;
+  }
+
+  .site-nav__link {
+    display: block;
+    padding: 16px 30px;
+    font-size: 18px;
+  }
+
+  .site-nav__link::after {
+    display: none;
+  }
+
+  /* --- HERO --- */
+  .hero__lead {
+    width: auto;
+    min-height: 0;
+    padding: 16px 28px;
+    border-radius: 30px;
+  }
+
+  /* 좁은 화면에서는 줄바꿈을 허용한다 */
+  .hero__lead-text {
+    white-space: normal;
+  }
+
+  /* 섹션 설명 문구도 타이틀 아래로 내려 왼쪽 정렬 */
+  .section__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .section__lead {
+    text-align: left;
+    padding-bottom: 0;
+  }
+
+  /* --- ABOUT --- */
+  /* 타이틀과 마퀴를 세로로 쌓는다 */
+  .about__head {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* 세로 배치에서는 타이틀이 내용만큼만 차지하도록 */
+  .about__head .section-title {
+    align-self: flex-start;
+  }
+
+  .marquee {
+    height: 64px;
+  }
+
+  .about__body {
+    grid-template-columns: 1fr;
+  }
+
+  .about__profile {
+    max-width: 360px;
+  }
+
+  .about__links {
+    margin-top: 30px;
+  }
+
+  .about__rolling-line {
+    gap: 16px;
+  }
+
+  .rolling {
+    width: 100%;
+    max-width: 340px;
+    height: 76px;
+  }
+
+  .rolling__list li {
+    height: 76px;
+  }
+
+  @keyframes rolling {
+    0%,   40%  { transform: translateY(0); }
+    50%,  90%  { transform: translateY(-76px); }
+    100%       { transform: translateY(-152px); }
+  }
+
+  .about__role {
+    white-space: normal;
+  }
+
+  /* --- EXPERIENCE --- */
+  .experience__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .experience__card {
+    padding: 30px;
+  }
+
+  /* 타임라인을 세로로 전환 */
+  .timeline {
+    flex-direction: column;
+    gap: 28px;
+    padding-inline: 0;
+    padding-left: 50px;
+  }
+
+  .timeline::before {
+    left: 15px;
+    right: auto;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    height: auto;
+  }
+
+  .timeline__item {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+    flex-wrap: wrap;
+  }
+
+  /* 세로 배치에서는 원(또는 marker 래퍼)을 왼쪽 선 위에 올린다 */
+  .timeline__dot {
+    width: 24px;
+    height: 24px;
+  }
+
+  .timeline__item > .timeline__dot,
+  .timeline__marker {
+    position: absolute;
+    left: -50px;
+    width: 24px;
+    height: 24px;
+  }
+
+  /* 좁은 화면에서 확장 박스가 넘치지 않도록 */
+  .timeline__item--job:hover .timeline__detail,
+  .timeline__item--job:focus-visible .timeline__detail {
+    left: 0;
+    translate: 0 -50%;
+    max-width: min(260px, 60vw);
+    padding: 12px 18px;
+    text-align: left;
+  }
+
+  /* --- PROJECTS --- */
+  .projects__inner {
+    grid-template-columns: 1fr;
+  }
+
+  /* 탭을 가로로 눕힌다 — 세로 구분선은 아래 보더로 대체 */
+  .projects__tabs {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 16px;
+    /* 가로 배치에서는 세로 구분선 대신 아래 보더 */
+    border-right: 0;
+    border-bottom: 2px solid var(--theme);
+    overflow-x: auto;
+  }
+
+  .projects__tabs-label {
+    height: auto;
+    padding: 10px 16px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  /* 가로 배치에서는 텍스트와 화살표를 한 줄로 */
+  .tab {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    height: 48px;
+    padding: 0 18px;
+    font-size: 18px;
+    border: 2px solid var(--theme);
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .tab__arrow {
+    width: 22px;
+    height: 22px;
+  }
+
+  .tab + .tab {
+    margin-top: 0;
+  }
+
+  .projects__gallery {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 24px;
+    gap: 16px;
+  }
+
+  /* --- CONTACT --- */
+  .contact {
+    padding-block: 90px;
+  }
+
+  .contact__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ~767px — 모바일
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  :root {
+    --fs-section-title: 32px;
+    --fs-32: 18px;
+    --fs-28: 20px;
+    --fs-24: 18px;
+    --fs-20: 16px;
+    --fs-18: 15px;
+  }
+
+  .container {
+    width: calc(100% - 40px);
+  }
+
+  .section {
+    padding-block: 56px;
+  }
+
+  .section__head,
+  .about__head {
+    margin-bottom: 36px;
+  }
+
+  .section-title {
+    height: 64px;
+    padding-inline: 22px;
+  }
+
+  /* 모서리 핸들 축소 */
+  .section-title::before,
+  .section-title::after,
+  .section-title > .section-title__handles::before,
+  .section-title > .section-title__handles::after {
+    width: 14px;
+    height: 14px;
+  }
+
+  .section-title::before { top: -7px; left: -7px; }
+  .section-title::after  { top: -7px; right: -7px; }
+  .section-title > .section-title__handles::before { bottom: -7px; left: -7px; }
+  .section-title > .section-title__handles::after  { bottom: -7px; right: -7px; }
+
+  /* --- HERO --- */
+  .hero__lead {
+    display: block;
+    padding: 14px 20px;
+    line-height: 1.5;
+    /* inline-flex 상태로 줄바꿈되면 단어 사이가 벌어지므로 block 으로 전환 */
+    text-align: center;
+    word-break: keep-all;
+  }
+
+  .hero__mouse {
+    width: 36px;
+    height: 58px;
+    border-width: 4px;
+  }
+
+  .hero__mouse::after {
+    top: 10px;
+    height: 10px;
+  }
+
+  @keyframes mouse-wheel {
+    0%, 100% { transform: translateY(0);   opacity: 1; }
+    50%      { transform: translateY(10px); opacity: 0.3; }
+  }
+
+  .hero__scroll {
+    gap: 8px;
+    bottom: 4%;
+  }
+
+  /* --- ABOUT --- */
+  .marquee {
+    height: 52px;
+  }
+
+  .about__card {
+    padding: 28px 22px;
+  }
+
+  .about__profile {
+    max-width: 100%;
+  }
+
+  .about__link-item {
+    width: 56px;
+    height: 56px;
+  }
+
+  .about__link-item img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .about__divider,
+  .about__desc {
+    margin-top: 28px;
+  }
+
+  .rolling {
+    max-width: 100%;
+    height: 60px;
+  }
+
+  .rolling__list li {
+    height: 60px;
+  }
+
+  @keyframes rolling {
+    0%,   40%  { transform: translateY(0); }
+    50%,  90%  { transform: translateY(-60px); }
+    100%       { transform: translateY(-120px); }
+  }
+
+  /* --- EXPERIENCE --- */
+  .experience__card {
+    padding: 24px 20px;
+  }
+
+  /* 라벨 옆 문구가 두 줄로 접히므로 아래로 내린다 */
+  .experience__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .licence-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .licence-list li {
+    justify-content: space-between;
+  }
+
+  /* --- SKILLS --- */
+  .skills__card {
+    padding: 24px 20px;
+  }
+
+  .tool-window {
+    padding: 16px;
+  }
+
+  .keycaps {
+    gap: 10px;
+  }
+
+  /* 작은 화면에서는 키 두께도 얇게 */
+  .keycap {
+    --key-depth: 6px;
+    border-radius: 9px;
+  }
+
+  .keycap img {
+    border-radius: 8px;
+  }
+
+  .tool-window__foot {
+    --key-depth: 5px;
+    height: 64px;
+  }
+
+  .skills__next {
+    gap: 20px;
+    padding: 26px 18px;
+  }
+
+  /* --- PROJECTS --- */
+  .projects__card {
+    padding: 20px;
+  }
+
+  .projects__gallery {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  /* --- CONTACT --- */
+  .contact {
+    padding-block: 60px;
+  }
+
+  .contact__inner {
+    padding: 28px 20px;
+  }
+
+  .contact__mail-row {
+    gap: 18px;
+    margin-top: 28px;
+  }
+
+  /* --- 맨 위로 --- */
+  .to-top {
+    right: 20px;
+    bottom: 20px;
+    width: 48px;
+    height: 48px;
+  }
+
+  /* 좁은 화면에서는 본문과 겹치므로 숨긴다 */
+  .section-dots {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   가로 모드 낮은 높이 — HERO가 잘리지 않도록
+   -------------------------------------------------------------------------- */
+@media (max-height: 520px) and (orientation: landscape) {
+  .hero {
+    height: auto;
+    min-height: 0;
+    padding-block: 120px 80px;
+  }
+
+  .hero__scroll {
+    display: none;
+  }
+}
