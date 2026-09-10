@@ -3,6 +3,8 @@
 신입 웹퍼블리셔 **김재은**의 포트폴리오 사이트입니다.
 Figma 디자인을 기반으로 프레임워크 없이 순수 HTML · CSS · JavaScript 로 구현했습니다.
 
+### 🔗 [사이트 바로가기 →](https://move-to-next-2026.vercel.app/)
+
 ```
 다음 목표들을 향해 앞으로 나아가고 있는 신입 웹퍼블리셔 김재은입니다.
 ```
@@ -135,8 +137,16 @@ VS Code **Live Server** 확장으로 열어도 동일하게 동작합니다.
 
 ---
 
+## 배포
+
+[Vercel](https://vercel.com) 로 배포했습니다.
+`main` 브랜치에 푸시하면 자동으로 재배포됩니다.
+
+**https://move-to-next-2026.vercel.app/**
+
 ## 링크
 
+- 사이트 — https://move-to-next-2026.vercel.app/
 - GitHub — https://github.com/move-to-next
 - Velog — https://velog.io/@move-to-next/posts
 - Email — rlawodms95@gmail.com
