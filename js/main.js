@@ -518,6 +518,84 @@
   /* ------------------------------------------------------------------------
      PROJECTS 탭 (WAI-ARIA Tabs 패턴)
      ------------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------------
+     PROJECTS 갤러리 페이지네이션
+       썸네일이 6개(3x2)를 넘으면 다음 페이지로 넘긴다.
+     ------------------------------------------------------------------------ */
+  function initGalleryPaging() {
+    var wraps = Array.prototype.slice.call(
+      document.querySelectorAll('.projects__gallery')
+    );
+    if (!wraps.length) return;
+
+    wraps.forEach(function (wrap) {
+      var pages = Array.prototype.slice.call(
+        wrap.querySelectorAll('.projects__page')
+      );
+      var dots = Array.prototype.slice.call(
+        wrap.querySelectorAll('.projects__page-dot')
+      );
+      var navs = Array.prototype.slice.call(
+        wrap.querySelectorAll('.projects__nav')
+      );
+      // 페이지가 하나뿐이면 조작부를 숨긴다
+      if (pages.length <= 1) {
+        var bar = wrap.querySelector('.projects__pagination');
+        if (bar) bar.hidden = true;
+        return;
+      }
+
+      var current = 0;
+
+      function render() {
+        pages.forEach(function (p, i) {
+          p.hidden = i !== current;
+        });
+        dots.forEach(function (d, i) {
+          d.classList.toggle('is-active', i === current);
+          d.setAttribute('aria-current', i === current ? 'true' : 'false');
+        });
+        navs.forEach(function (n) {
+          var dir = n.getAttribute('data-dir');
+          n.disabled = dir === 'prev' ? current === 0 : current === pages.length - 1;
+        });
+
+        /*
+          새로 보이는 페이지의 썸네일을 다시 등장시킨다.
+          (hidden 상태에서는 IntersectionObserver 가 동작하지 않는다)
+        */
+        var items = pages[current].querySelectorAll('.reveal');
+        Array.prototype.forEach.call(items, function (el, i) {
+          el.classList.remove('is-visible');
+          el.style.setProperty('--reveal-delay', i * 70 + 'ms');
+        });
+        window.setTimeout(function () {
+          Array.prototype.forEach.call(items, function (el) {
+            el.classList.add('is-visible');
+          });
+        }, 20);
+      }
+
+      dots.forEach(function (d) {
+        d.addEventListener('click', function () {
+          current = Number(d.getAttribute('data-page')) || 0;
+          render();
+        });
+      });
+
+      navs.forEach(function (n) {
+        n.addEventListener('click', function () {
+          var dir = n.getAttribute('data-dir');
+          current += dir === 'prev' ? -1 : 1;
+          current = Math.max(0, Math.min(pages.length - 1, current));
+          render();
+        });
+      });
+
+      render();
+    });
+  }
+
   function initTabs() {
     var tablist = document.querySelector('.projects__tabs[role="tablist"]');
     if (!tablist) return;
@@ -985,6 +1063,7 @@
     initNavToggle();
     initSkillPanel();
     initTabs();
+    initGalleryPaging();
     initCopy();
     initSectionDots();
     initToTop();

@@ -635,30 +635,68 @@
 
             <!-- DESIGN 패널 -->
             <div
-              class="projects__gallery tabpanel reveal-group"
+              class="projects__gallery tabpanel"
               id="panel-design"
               role="tabpanel"
               aria-labelledby="tab-design"
               tabindex="0"
             >
-              <figure class="project-item reveal">
-                <img src="assets/images/project-1.webp" alt="디자인 작업물 1" loading="lazy">
-              </figure>
-              <figure class="project-item reveal">
-                <img src="assets/images/project-2.webp" alt="디자인 작업물 2" loading="lazy">
-              </figure>
-              <figure class="project-item reveal">
-                <img src="assets/images/project-3.webp" alt="디자인 작업물 3" loading="lazy">
-              </figure>
-              <figure class="project-item reveal">
-                <img src="assets/images/project-4.webp" alt="디자인 작업물 4" loading="lazy">
-              </figure>
-              <figure class="project-item reveal">
-                <img src="assets/images/project-5.webp" alt="디자인 작업물 5" loading="lazy">
-              </figure>
-              <figure class="project-item reveal">
-                <img src="assets/images/project-6.webp" alt="디자인 작업물 6" loading="lazy">
-              </figure>
+              <!-- 6개씩 한 페이지, 넘치면 다음 페이지로 -->
+              <div class="projects__pages">
+                <div class="projects__page reveal-group">
+                  <figure class="project-item reveal">
+                    <img src="assets/images/project-1.webp" alt="디자인 작업물 1" loading="lazy">
+                  </figure>
+                  <figure class="project-item reveal">
+                    <img src="assets/images/project-2.webp" alt="디자인 작업물 2" loading="lazy">
+                  </figure>
+                  <figure class="project-item reveal">
+                    <img src="assets/images/project-3.webp" alt="디자인 작업물 3" loading="lazy">
+                  </figure>
+                  <figure class="project-item reveal">
+                    <img src="assets/images/project-4.webp" alt="디자인 작업물 4" loading="lazy">
+                  </figure>
+                  <figure class="project-item reveal">
+                    <img src="assets/images/project-5.webp" alt="디자인 작업물 5" loading="lazy">
+                  </figure>
+                  <figure class="project-item reveal">
+                    <img src="assets/images/project-6.webp" alt="디자인 작업물 6" loading="lazy">
+                  </figure>
+                </div>
+                <div class="projects__page reveal-group" hidden>
+                  <figure class="project-item reveal">
+                    <img src="assets/images/project-7.webp" alt="디자인 작업물 7" loading="lazy">
+                  </figure>
+                  <figure class="project-item reveal">
+                    <img src="assets/images/project-8.webp" alt="디자인 작업물 8" loading="lazy">
+                  </figure>
+                  <figure class="project-item reveal">
+                    <img src="assets/images/project-9.webp" alt="디자인 작업물 9" loading="lazy">
+                  </figure>
+                  <figure class="project-item reveal">
+                    <img src="assets/images/project-10.webp" alt="디자인 작업물 10" loading="lazy">
+                  </figure>
+                </div>
+              </div>
+
+              <div class="projects__pagination">
+                <button class="projects__nav" type="button" data-dir="prev" aria-label="이전 페이지">‹</button>
+                <div class="projects__dots">
+                  <button
+                    class="projects__page-dot is-active"
+                    type="button"
+                    data-page="0"
+                    aria-label="1페이지 보기"
+                  ></button>
+                  <button
+                    class="projects__page-dot"
+                    type="button"
+                    data-page="1"
+                    aria-label="2페이지 보기"
+                  ></button>
+                </div>
+                <button class="projects__nav" type="button" data-dir="next" aria-label="다음 페이지">›</button>
+              </div>
             </div>
 
             <!-- PUBLISHING 패널 -->

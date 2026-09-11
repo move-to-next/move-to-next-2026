@@ -1550,12 +1550,90 @@
 */
 
 /* 우측 썸네일 갤러리 */
+/*
+  갤러리 — 페이지 영역 + 하단 페이지네이션 세로 배치.
+  그리드는 각 페이지(.projects__page)가 담당한다.
+*/
 .projects__gallery {
+  display: flex;
+  flex-direction: column;
+  padding: 36px 40px 24px;
+}
+
+.projects__pages {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* 3 x 2 = 6개 */
+.projects__page {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  padding: 40px;
-  align-content: center;
+  width: 100%;
+}
+
+.projects__page[hidden] {
+  display: none;
+}
+
+/* 페이지네이션 */
+.projects__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.projects__nav {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--theme);
+  border-radius: 50%;
+  color: var(--theme);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
+}
+
+.projects__nav:hover:not(:disabled) {
+  background: var(--theme);
+  color: var(--c-white);
+}
+
+.projects__nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.projects__dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.projects__page-dot {
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--theme);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out),
+    scale var(--dur-fast) var(--ease-out);
+}
+
+.projects__page-dot:hover,
+.projects__page-dot.is-active {
+  background: var(--theme);
+  scale: 1.2;
 }
 
 .project-item {
