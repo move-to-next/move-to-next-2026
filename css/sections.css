@@ -1037,15 +1037,6 @@
   line-height: 1.3;
 }
 
-.timeline__detail-label {
-  display: block;
-  margin-bottom: 2px;
-  font-weight: 500;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  opacity: 0.75;
-}
-
 /* 배운 내용 목록 */
 .timeline__detail-list {
   display: flex;
