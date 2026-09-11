@@ -863,8 +863,8 @@
 */
 .experience__grid {
   display: grid;
-  grid-template-columns: 1.45fr 1fr;
-  gap: 60px 40px;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 30px 36px;
 }
 
 .experience__card {
@@ -886,7 +886,7 @@
 
 .experience__head-kr {
   font-weight: 500;
-  font-size: var(--fs-20);
+  font-size: var(--fs-24);
   letter-spacing: -0.02em;
   color: var(--theme);
 }
@@ -897,7 +897,8 @@
   display: flex;
   justify-content: space-between;
   margin-top: 46px;
-  padding-inline: 30px;
+  /* 항목 텍스트가 줄바꿈되지 않도록 여백을 줄인다 */
+  padding-inline: 14px;
 }
 
 /*
@@ -936,7 +937,7 @@
   align-items: center;
   gap: 8px;
   /* 항목 사이 여백을 확보해 긴 학교명이 서로 겹치지 않게 한다 */
-  padding-inline: 6px;
+  padding-inline: 2px;
   text-align: center;
   color: var(--theme);
   flex: 1;
