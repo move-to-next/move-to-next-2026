@@ -864,12 +864,12 @@
 .experience__grid {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
-  gap: 30px 36px;
+  gap: 16px 36px;
 }
 
 .experience__card {
-  padding: 33px 40px 40px;
-  min-height: 270px;
+  padding: 30px 40px 32px;
+  min-height: 0;
 }
 
 /* CAREER 카드는 전체 폭 */
@@ -896,7 +896,7 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin-top: 46px;
+  margin-top: 34px;
   /* 항목 텍스트가 줄바꿈되지 않도록 여백을 줄인다 */
   padding-inline: 14px;
 }
