@@ -987,8 +987,11 @@
   z-index: 2;
   translate: -50% -50%;
 
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: center;
   width: 30px;
   height: 30px;
   padding: 0;
@@ -999,7 +1002,7 @@
   font-size: var(--fs-16);
   letter-spacing: -0.02em;
   line-height: 1.4;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
 
   /* 접힌 상태에서는 글자를 감춘다 */
@@ -1015,12 +1018,30 @@
 .timeline__item--job:hover .timeline__detail,
 .timeline__item--job:focus-visible .timeline__detail {
   width: max-content;
-  max-width: 320px;
+  max-width: 380px;
   height: auto;
   min-height: 54px;
-  padding: 14px 26px;
+  padding: 18px 28px;
+  border-radius: 20px;
   opacity: 1;
   white-space: normal;
+}
+
+/* 업무 목록 — 불릿 있는 리스트 */
+.timeline__detail li {
+  position: relative;
+  padding-left: 14px;
+}
+
+.timeline__detail li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
 }
 
 /* 확장되는 동안 원과 기존 텍스트는 사라진다 */
