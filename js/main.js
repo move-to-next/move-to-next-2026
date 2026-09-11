@@ -596,6 +596,69 @@
     });
   }
 
+  /* ------------------------------------------------------------------------
+     프로젝트 상세 보기 모달
+       썸네일을 누르면 전체 디자인 이미지를 모달에서 스크롤하며 본다.
+     ------------------------------------------------------------------------ */
+  function initProjectModal() {
+    var modal = document.getElementById('project-modal');
+    if (!modal) return;
+
+    var img = modal.querySelector('.project-modal__img');
+    var title = modal.querySelector('.project-modal__title');
+    var body = modal.querySelector('.project-modal__body');
+    var items = Array.prototype.slice.call(
+      document.querySelectorAll('.project-item[data-detail]')
+    );
+    if (!items.length) return;
+
+    var lastFocused = null;
+
+    function open(btn) {
+      lastFocused = btn;
+
+      img.src = btn.getAttribute('data-detail');
+      img.alt = btn.getAttribute('data-title') || '';
+      title.textContent = btn.getAttribute('data-title') || '';
+
+      modal.hidden = false;
+      document.documentElement.classList.add('is-modal-open');
+
+      // 항상 이미지 맨 위부터 보여준다
+      body.scrollTop = 0;
+
+      var closeBtn = modal.querySelector('.project-modal__close');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function close() {
+      modal.hidden = true;
+      document.documentElement.classList.remove('is-modal-open');
+      // 메모리 절약 — 닫으면 이미지를 놓아준다
+      img.removeAttribute('src');
+      if (lastFocused) lastFocused.focus();
+    }
+
+    items.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        open(btn);
+      });
+    });
+
+    // 배경·닫기 버튼
+    Array.prototype.forEach.call(
+      modal.querySelectorAll('[data-close]'),
+      function (el) {
+        el.addEventListener('click', close);
+      }
+    );
+
+    // ESC 로 닫기
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) close();
+    });
+  }
+
   function initTabs() {
     var tablist = document.querySelector('.projects__tabs[role="tablist"]');
     if (!tablist) return;
@@ -1064,6 +1127,7 @@
     initSkillPanel();
     initTabs();
     initGalleryPaging();
+    initProjectModal();
     initCopy();
     initSectionDots();
     initToTop();

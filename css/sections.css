@@ -2023,3 +2023,121 @@
 .to-top:hover {
   background: var(--c-about);
 }
+
+/* ==========================================================================
+   프로젝트 상세 보기 모달
+
+   상세 이미지는 세로가 매우 길어(최대 13000px+) 전체를 한 번에 보여주면
+   아무것도 읽히지 않는다. → 상단 일부만 보이고 안에서 스크롤한다.
+   ========================================================================== */
+
+.project-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+}
+
+.project-modal[hidden] {
+  display: none;
+}
+
+.project-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 20, 16, 0.6);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  cursor: pointer;
+}
+
+.project-modal__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(940px, 100%);
+  /* 화면 높이의 대부분을 쓰되 넘치지 않게 */
+  max-height: min(86vh, 900px);
+  background: var(--c-white);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.project-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e6e6e6;
+  flex-shrink: 0;
+}
+
+.project-modal__title {
+  font-weight: 500;
+  font-size: var(--fs-18);
+  letter-spacing: -0.02em;
+}
+
+.project-modal__close {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-size: 26px;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.project-modal__close:hover {
+  background: #f0f0f0;
+  color: #111;
+}
+
+/* 스크롤되는 영역 — 상단부터 보이고 아래로 내려간다 */
+.project-modal__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #f7f7f7;
+}
+
+.project-modal__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 스크롤바를 얇게 */
+.project-modal__body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.project-modal__body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+  border: 3px solid #f7f7f7;
+}
+
+/* 썸네일이 버튼이 되면서 필요한 보정 */
+.project-item {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+/* 모달이 열린 동안 배경 스크롤 잠금 */
+.is-modal-open {
+  overflow: hidden;
+}
