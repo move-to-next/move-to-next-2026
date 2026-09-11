@@ -532,15 +532,23 @@
       var pages = Array.prototype.slice.call(
         wrap.querySelectorAll('.projects__page')
       );
+      /*
+        조작부는 탭 영역(.projects__tabs)으로 옮겨져 갤러리 바깥에 있다.
+        → 공통 부모(.projects__inner)에서 찾는다.
+      */
+      var scope = wrap.closest('.projects__inner') || document;
       var dots = Array.prototype.slice.call(
-        wrap.querySelectorAll('.projects__page-dot')
+        scope.querySelectorAll('.projects__page-dot')
       );
       var navs = Array.prototype.slice.call(
-        wrap.querySelectorAll('.projects__nav')
+        scope.querySelectorAll('.projects__nav')
       );
+      // 페이지 구조가 없는 갤러리(PUBLISHING)는 대상 아님
+      if (!pages.length) return;
+
       // 페이지가 하나뿐이면 조작부를 숨긴다
       if (pages.length <= 1) {
-        var bar = wrap.querySelector('.projects__pagination');
+        var bar = scope.querySelector('.projects__pagination');
         if (bar) bar.hidden = true;
         return;
       }

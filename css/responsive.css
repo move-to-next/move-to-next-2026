@@ -336,6 +336,16 @@
     overflow-x: auto;
   }
 
+  /*
+    가로 배치에서는 페이지네이션을 탭 줄에서 빼내
+    갤러리 아래로 되돌린다. (margin:auto 가 탭 줄을 늘린다)
+  */
+  .projects__pagination {
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
   .projects__tabs-label {
     height: auto;
     padding: 10px 16px;
@@ -366,8 +376,12 @@
   }
 
   .projects__gallery {
-    grid-template-columns: repeat(2, 1fr);
     padding: 24px;
+  }
+
+  /* 그리드는 페이지가 담당 — 좁은 화면에선 2열 */
+  .projects__page {
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
 

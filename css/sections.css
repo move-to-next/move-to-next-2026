@@ -1557,7 +1557,8 @@
 .projects__gallery {
   display: flex;
   flex-direction: column;
-  padding: 36px 40px 24px;
+  justify-content: center;
+  padding: 36px 40px;
 }
 
 .projects__pages {
@@ -1578,13 +1579,16 @@
   display: none;
 }
 
-/* 페이지네이션 */
+/* 페이지네이션 — 탭 아래 빈 공간에 배치 */
 .projects__pagination {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
-  margin-top: 28px;
+  gap: 14px;
+  /* 남는 세로 공간의 가운데로 */
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 24px 12px;
 }
 
 .projects__nav {
