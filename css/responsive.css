@@ -24,9 +24,7 @@
 @media (min-width: 1921px) {
   :root {
     /* clamp 는 무단위 수와 vw 를 섞지 못하므로 길이로 계산 후 1px 로 나눈다 */
-    --fs-scale: calc(
-      clamp(1px, 0.6211px + 0.0197 * 1vw, 1.3px) / 1px
-    );
+    --fs-scale: calc(clamp(1px, 0.6211px + 0.0197vw, 1.3px) / 1px);
   }
 }
 
@@ -573,6 +571,8 @@
   /* 작은 화면에서는 키 두께도 얇게 */
   .keycap {
     --key-depth: 6px;
+    --key-rest: -6px;
+    --key-press: -0.9px;
     border-radius: 9px;
   }
 
@@ -582,6 +582,8 @@
 
   .tool-window__foot {
     --key-depth: 5px;
+    --key-rest: -5px;
+    --key-press: -0.75px;
     height: 64px;
   }
 

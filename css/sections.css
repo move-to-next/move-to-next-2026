@@ -1217,6 +1217,14 @@
 */
 .keycap {
   --key-depth: calc(9px * var(--fs-scale));
+  /*
+    transform 에 들어갈 값은 미리 확정해 둔다.
+    transform:translateY(calc(var(--변수) * -0.15)) 처럼
+    계산식을 중첩하면 시작·끝값이 모두 변수 의존이 되어
+    브라우저가 중간 단계를 계산하지 못하고 전환을 건너뛴다.
+  */
+  --key-rest: calc(-9px * var(--fs-scale));
+  --key-press: calc(-1.35px * var(--fs-scale));
   position: relative;
   display: block;
   width: 100%;
@@ -1246,7 +1254,7 @@
   object-fit: cover;
   border-radius: 11px;
   /* 위로 띄워 아래에 측면 벽을 노출 */
-  transform: translateY(calc(var(--key-depth) * -1));
+  transform: translateY(var(--key-rest));
   /* 윗면 가장자리 광택 */
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
     inset 0 -1px 0 rgba(0, 0, 0, 0.2);
@@ -1267,7 +1275,7 @@
   .keycap img / :hover img 보다 뒤에 와야 transform 이 덮이지 않는다.
 */
 .keycap.is-active img {
-  transform: translateY(calc(var(--key-depth) * -0.15));
+  transform: translateY(var(--key-press));
 }
 
 .keycap.is-active {
@@ -1277,6 +1285,8 @@
 /* gnuboard — 스페이스바 형태의 넓은 키 */
 .tool-window__foot {
   --key-depth: calc(8px * var(--fs-scale));
+  --key-rest: calc(-8px * var(--fs-scale));
+  --key-press: calc(-1.2px * var(--fs-scale));
   /* 스페이스바처럼 가로 전체를 채운다 (flex 자식은 기본이 축소) */
   width: 100%;
   align-self: stretch;
