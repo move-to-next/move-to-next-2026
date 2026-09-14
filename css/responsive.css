@@ -404,6 +404,16 @@
     gap: 16px;
   }
 
+  /*
+    PUBLISHING 은 넓은 화면에서 컬럼 폭을 고정했다(3 x 290px).
+    좁은 화면에서는 위 2열 규칙을 따르도록 되돌린다.
+  */
+  #panel-publishing .projects__page {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 16px;
+    justify-content: stretch;
+  }
+
   /* --- CONTACT --- */
   .contact {
     padding-block: 90px;

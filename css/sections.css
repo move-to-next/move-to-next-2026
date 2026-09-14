@@ -2462,9 +2462,8 @@
 
 #panel-publishing .project-item {
   /*
-    칸을 목업 이미지와 같은 비율로 맞춘다.
-    칸이 더 넓으면 contain 이 좌우에 빈 공간을 만들어
-    간격이 들쭉날쭉해 보인다.
+    비율은 목업과 동일하게 유지한다(좌우 빈 공간이 생기지 않는다).
+    세로를 줄이려면 칸 자체를 작게 — 아래 max-width 로 폭을 제한한다.
   */
   aspect-ratio: 941 / 727;
   overflow: visible;
@@ -2509,4 +2508,10 @@
   align-items: center;
   /* 목업이 칸을 꽉 채워 기본 간격으로는 서로 붙어 보인다 */
   gap: calc(34px * var(--fs-scale)) calc(30px * var(--fs-scale));
+  /*
+    모니터 세로를 줄이려면 칸(=컬럼) 자체가 작아져야 한다.
+    컬럼 폭을 좁히고 전체를 가운데로 모은다.
+  */
+  grid-template-columns: repeat(3, minmax(0, 290px));
+  justify-content: center;
 }
