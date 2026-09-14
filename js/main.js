@@ -712,8 +712,8 @@
       scope: '메인페이지, 서브페이지',
       tools: 'HTML5, CSS, PHP(Gnuboard), Figma',
       period: '26.03.02 ~ 26.03.09 (8일)',
-      site: '#',
-      figma: '#',
+      site: 'http://durucarbon.com/',
+      figma: 'https://www.figma.com/design/icMAjlmJG763HvbwSNZJdU/%EB%91%90%EB%A3%A8%EA%B7%B8%EB%9D%BC%ED%8C%8C%EC%9D%B4%ED%8A%B8-%EC%9B%B9%EB%94%94%EC%9E%90%EC%9D%B8-%EC%8B%9C%EC%95%88?node-id=0-1&p=f&t=ZFRTbmzIGjDCpAX0-0',
       devices: ['pc', 'tablet', 'mobile']
     },
     nomia: {
@@ -723,8 +723,8 @@
       scope: '메인페이지, 서브페이지',
       tools: 'HTML5, CSS, JavaScript, Figma',
       period: '26.02.10 ~ 26.02.20 (11일)',
-      site: '#',
-      figma: '#',
+      site: 'https://movetonext.dothome.co.kr/main-page.html',
+      figma: 'https://www.figma.com/design/Fa0xIovkim5ibXmuFSGto5/%EB%85%B8%EB%AF%B8%EC%95%84-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EC%9B%B9%EB%94%94%EC%9E%90%EC%9D%B8?node-id=0-1&p=f&t=ALx6Lv1XaLdOrggx-0',
       devices: ['pc', 'tablet', 'mobile']
     },
     janggun: {
@@ -734,8 +734,8 @@
       scope: '메인페이지, 서브페이지',
       tools: 'HTML5, CSS, PHP(Gnuboard), Figma',
       period: '26.01.15 ~ 26.01.24 (10일)',
-      site: '#',
-      figma: '#',
+      site: 'http://www.xn--6e0bo02bvodpsm.com/',
+      figma: 'https://www.figma.com/design/3Vg2j1d2CmfbEppSdjDCmX/%EC%9E%A5%EA%B5%B0%ED%86%B5%EC%8B%A0-%EC%9B%B9%EB%94%94%EC%9E%90%EC%9D%B8-%EC%8B%9C%EC%95%88?node-id=0-1&p=f&t=a5jZsSx9y3SE3mXt-0',
       devices: ['pc', 'tablet', 'mobile']
     },
     guardk: {
@@ -745,8 +745,8 @@
       scope: '메인페이지',
       tools: 'HTML5, CSS, JavaScript, Figma',
       period: '25.12.08 ~ 25.12.15 (8일)',
-      site: '#',
-      figma: '#',
+      site: 'http://www.guardk.com/',
+      figma: 'https://www.figma.com/design/1w51LI6HhKSsSk8CcO8gTh/%EA%B0%80%EB%93%9C%EC%BC%80%EC%9D%B4-%EC%9B%B9%EB%94%94%EC%9E%90%EC%9D%B8-%EC%8B%9C%EC%95%88?node-id=0-1&p=f&t=yIGdyceINiE33E2e-0',
       devices: ['pc', 'tablet', 'mobile']
     },
     burgerking: {
@@ -756,8 +756,8 @@
       scope: '메인페이지, 서브페이지',
       tools: 'HTML5, CSS, JavaScript, Figma',
       period: '25.11.03 ~ 25.11.12 (10일)',
-      site: '#',
-      figma: '#',
+      site: 'https://move-to-next.github.io/burgerKing-1st-port/',
+      figma: 'https://www.figma.com/design/A3WtROeuJ2dCCfsze5kwKc/%EB%B2%84%EA%B1%B0%ED%82%B9-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EC%9B%B9%EB%94%94%EC%9E%90%EC%9D%B8?node-id=2-2&p=f&t=gFuyFChbuQKAbvzP-0',
       devices: ['pc', 'tablet', 'mobile']
     },
     newbalance: {
@@ -767,8 +767,8 @@
       scope: '메인페이지',
       tools: 'HTML5, CSS, JavaScript, Figma',
       period: '25.10.06 ~ 25.10.13 (8일)',
-      site: '#',
-      figma: '#',
+      site: 'https://move-to-next.github.io/newbalace-CloneWebsite/',
+      figma: 'https://www.figma.com/design/JX3IecNnVxA3gt8TsQoYab/%EB%89%B4%EB%B0%9C%EB%9E%80%EC%8A%A4-%EC%82%AC%EC%9D%B4%ED%8A%B8-HTML-%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83?node-id=73-2&p=f&t=nx6kYoZrLCBy4uK6-0',
       // 태블릿·모바일 시안은 제작하지 않았다
       devices: ['pc']
     }
