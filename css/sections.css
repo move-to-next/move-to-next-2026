@@ -679,9 +679,16 @@
 /* 본문 2단 그리드 */
 .about__body {
   display: grid;
-  grid-template-columns: 410px 1fr;
-  gap: 60px;
-  align-items: start;
+  grid-template-columns: calc(410px * var(--fs-scale)) 1fr;
+  gap: calc(60px * var(--fs-scale));
+  /* 좌우 열 높이를 맞춰 LINK 를 설명 박스 하단에 정렬한다 */
+  align-items: stretch;
+}
+
+/* 사진은 위, LINK 는 아래로 밀어붙인다 */
+.about__aside {
+  display: flex;
+  flex-direction: column;
 }
 
 .about__profile {
@@ -693,7 +700,9 @@
 
 /* LINK 영역 */
 .about__links {
-  margin-top: 50px;
+  /* 남는 공간을 위로 몰아 설명 박스 본문 하단과 맞춘다 */
+  margin-top: auto;
+  padding-top: calc(50px * var(--fs-scale));
 }
 
 .about__links-title {
@@ -758,7 +767,7 @@
 
 /* 우측 유리 카드 */
 .about__card {
-  padding: 56px 60px;
+  padding: calc(56px * var(--fs-scale)) calc(60px * var(--fs-scale));
 }
 
 .about__intro {
@@ -911,8 +920,9 @@
 .timeline::before {
   content: "";
   position: absolute;
-  left: calc(var(--dot) / 2 + 14px);
-  right: calc(var(--dot) / 2 + 14px);
+  /* 첫 점 ~ 마지막 점 중심 (JS 가 실측해 넣는다) */
+  left: var(--line-left, 30px);
+  right: var(--line-right, 30px);
   /* 점 행의 세로 중심 — JS 없이 그리드 행 높이로 맞춘다 */
   top: var(--line-top, 47px);
   height: 3px;
@@ -1155,6 +1165,7 @@
 .tool-window {
   display: flex;
   flex-direction: column;
+  /* 오른쪽 패널과 같은 높이 기준 */
   height: calc(500px * var(--fs-scale));
   background: linear-gradient(180deg, #f2f2f2 0%, #d9d9d9 100%);
   border-radius: 14px;
@@ -1192,7 +1203,9 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: calc(14px * var(--fs-scale));
-  margin-top: calc(24px * var(--fs-scale));
+  /* 위아래 간격 실측 기준 (키캡 입체 깊이가 위쪽에 더해진다) */
+  margin-top: calc(8px * var(--fs-scale));
+  margin-bottom: 0;
 }
 
 /*
@@ -1268,7 +1281,8 @@
   aspect-ratio: auto;
   height: calc(96px * var(--fs-scale));
   flex-shrink: 0;
-  margin-top: calc(20px * var(--fs-scale));
+  /* 키캡과 최소 간격 확보 */
+  margin-top: calc(26px * var(--fs-scale));
   --key-side: #c9c6c3;
 }
 
@@ -1595,9 +1609,9 @@
   align-items: center;
   justify-content: center;
   gap: calc(14px * var(--fs-scale));
-  /* 남는 세로 공간의 가운데로 */
+  /* 남는 세로 공간을 위로 몰아 아래쪽에 배치하되, 바닥에 붙지 않게 */
   margin-top: auto;
-  margin-bottom: auto;
+  margin-bottom: calc(24px * var(--fs-scale));
   padding: calc(24px * var(--fs-scale)) calc(12px * var(--fs-scale));
 }
 

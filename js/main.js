@@ -259,11 +259,22 @@
     */
     function alignLines() {
       lines.forEach(function (tl) {
-        var dot = tl.querySelector('.timeline__marker, .timeline__dot');
-        if (!dot) return;
+        // 항목마다 하나씩만 — marker 가 있으면 그것, 없으면 dot
+        var dots = Array.prototype.map
+          .call(tl.querySelectorAll('.timeline__item'), function (it) {
+            return it.querySelector('.timeline__marker, .timeline__dot');
+          })
+          .filter(Boolean);
+        if (!dots.length) return;
         var t = tl.getBoundingClientRect();
-        var d = dot.getBoundingClientRect();
-        tl.style.setProperty('--line-top', (d.top + d.height / 2 - t.top) + 'px');
+        var first = dots[0].getBoundingClientRect();
+        var last = dots[dots.length - 1].getBoundingClientRect();
+
+        // 세로: 점의 중심 높이
+        tl.style.setProperty('--line-top', (first.top + first.height / 2 - t.top) + 'px');
+        // 가로: 첫 점 중심에서 시작해 마지막 점 중심에서 끝난다
+        tl.style.setProperty('--line-left', (first.left + first.width / 2 - t.left) + 'px');
+        tl.style.setProperty('--line-right', (t.right - (last.left + last.width / 2)) + 'px');
       });
     }
 
