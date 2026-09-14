@@ -2506,8 +2506,8 @@
 
 #panel-publishing .projects__page {
   align-items: center;
-  /* 목업이 칸을 꽉 채워 기본 간격으로는 서로 붙어 보인다 */
-  gap: calc(34px * var(--fs-scale)) calc(30px * var(--fs-scale));
+  /* 위아래는 모으고(20), 좌우는 넓힌다(46) */
+  gap: calc(20px * var(--fs-scale)) calc(46px * var(--fs-scale));
   /*
     모니터 세로를 줄이려면 칸(=컬럼) 자체가 작아져야 한다.
     컬럼 폭을 좁히고 전체를 가운데로 모은다.
