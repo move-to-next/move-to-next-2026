@@ -2315,7 +2315,8 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
   gap: calc(28px * var(--fs-scale));
-  align-items: start;
+  /* 좌우 칸 높이를 맞춰 세로 중심을 정렬한다 */
+  align-items: stretch;
   padding: calc(24px * var(--fs-scale));
   border: 1px solid #ddd8c4;
   border-radius: calc(12px * var(--fs-scale));
@@ -2326,6 +2327,14 @@
 .pub-device {
   margin: 0;
   min-width: 0;
+  /* 라벨은 위에 두고 내용(틀·목업)은 남는 공간 가운데로 */
+  display: flex;
+  flex-direction: column;
+}
+
+.pub-shot__frame,
+.pub-device__stage {
+  margin-block: auto;
 }
 
 .pub-shot__label {
@@ -2373,8 +2382,6 @@
 .pub-device__stage {
   position: relative;
   height: calc(420px * var(--fs-scale));
-  /* 라벨과 목업이 붙지 않도록 */
-  margin-top: calc(4px * var(--fs-scale));
 }
 
 /* PC 를 바닥에 크게 깔고 */
