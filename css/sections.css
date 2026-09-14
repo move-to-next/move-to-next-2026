@@ -923,8 +923,8 @@
   /* 첫 점 ~ 마지막 점 중심 (JS 가 실측해 넣는다) */
   left: var(--line-left, 30px);
   right: var(--line-right, 30px);
-  /* 점 행의 세로 중심 — JS 없이 그리드 행 높이로 맞춘다 */
-  top: var(--line-top, 47px);
+  /* 점 중심에서 위로 올린다 */
+  top: calc(var(--line-top, 47px) - calc(14px * var(--fs-scale)));
   height: 3px;
   translate: 0 -50%;
   background: var(--theme);
@@ -1165,8 +1165,8 @@
 .tool-window {
   display: flex;
   flex-direction: column;
-  /* 오른쪽 패널과 같은 높이 기준 */
-  height: calc(500px * var(--fs-scale));
+  /* 오른쪽 패널과 같은 높이 기준 (키캡을 내린 만큼 여유 확보) */
+  height: calc(545px * var(--fs-scale));
   background: linear-gradient(180deg, #f2f2f2 0%, #d9d9d9 100%);
   border-radius: 14px;
   padding: calc(22px * var(--fs-scale)) calc(26px * var(--fs-scale)) calc(26px * var(--fs-scale));
@@ -1203,8 +1203,8 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: calc(14px * var(--fs-scale));
-  /* 위아래 간격 실측 기준 (키캡 입체 깊이가 위쪽에 더해진다) */
-  margin-top: calc(8px * var(--fs-scale));
+  /* 키캡을 아래로 내린다 */
+  margin-top: calc(56px * var(--fs-scale));
   margin-bottom: 0;
 }
 
@@ -1309,7 +1309,7 @@
 
 .skills__panel {
   position: relative;
-  height: calc(500px * var(--fs-scale));
+  height: calc(545px * var(--fs-scale));
   background: var(--c-white);
   border: 2px solid var(--theme);
   border-radius: var(--radius-card);
@@ -1609,9 +1609,9 @@
   align-items: center;
   justify-content: center;
   gap: calc(14px * var(--fs-scale));
-  /* 남는 세로 공간을 위로 몰아 아래쪽에 배치하되, 바닥에 붙지 않게 */
+  /* 탭 아래로 충분히 내린다 */
   margin-top: auto;
-  margin-bottom: calc(24px * var(--fs-scale));
+  margin-bottom: 0;
   padding: calc(24px * var(--fs-scale)) calc(12px * var(--fs-scale));
 }
 

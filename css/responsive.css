@@ -99,6 +99,8 @@
   .keycaps {
     grid-auto-rows: auto;
     flex: none;
+    /* 창 높이가 auto 라 넓은 화면용 여백은 불필요 */
+    margin-top: 24px;
   }
 
   .keycap {
