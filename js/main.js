@@ -707,7 +707,7 @@
   var PUB_DATA = {
     durugraphite: {
       name: '두루 그라파이트 홈페이지',
-      badge: '포트폴리오',
+      badge: '실무작업',
       role: '디자인 100%, 퍼블리싱 100%',
       scope: '메인페이지, 서브페이지',
       tools: 'HTML5, CSS, PHP(Gnuboard), Figma',
@@ -728,8 +728,8 @@
       devices: ['pc', 'tablet', 'mobile']
     },
     janggun: {
-      name: '장군 홈페이지',
-      badge: '포트폴리오',
+      name: '장군통신 홈페이지',
+      badge: '실무작업',
       role: '디자인 100%, 퍼블리싱 100%',
       scope: '메인페이지, 서브페이지',
       tools: 'HTML5, CSS, PHP(Gnuboard), Figma',
@@ -740,7 +740,7 @@
     },
     guardk: {
       name: '가드케이 홈페이지',
-      badge: '포트폴리오',
+      badge: '실무작업',
       role: '디자인 100%, 퍼블리싱 100%',
       scope: '메인페이지',
       tools: 'HTML5, CSS, JavaScript, Figma',
@@ -820,6 +820,22 @@
       var base = 'assets/images/projects/' + key + '-';
       elFull.src = base + 'fullpage.webp';
       elFull.alt = d.name + ' 전체 화면';
+
+      /*
+        풀페이지 길이는 사이트마다 크게 다르다(비율 0.79 ~ 4.33).
+        기본 틀 높이보다 짧은 이미지는 아래에 빈 공간이 남으므로,
+        그런 경우에만 틀을 이미지 높이에 맞춰 줄인다.
+      */
+      elFrame.style.height = '';
+      var fit = function () {
+        if (!elFull.naturalWidth) return;
+        var shown = elFull.getBoundingClientRect().width;
+        var h = shown * (elFull.naturalHeight / elFull.naturalWidth);
+        var max = elFrame.clientHeight;
+        if (h > 0 && h < max) elFrame.style.height = Math.ceil(h) + 'px';
+      };
+      if (elFull.complete) fit();
+      else elFull.addEventListener('load', fit, { once: true });
 
       // 시안이 있는 기기만 보여준다 (뉴발란스는 PC 뿐)
       var has = function (n) { return d.devices.indexOf(n) > -1; };
@@ -910,6 +926,18 @@
         var panel = document.getElementById(t.getAttribute('aria-controls'));
         if (panel) panel.hidden = !selected;
       });
+
+      /*
+        페이지네이션은 탭 영역에 하나뿐이다.
+        활성 패널이 한 페이지짜리면(PUBLISHING) 감춘다.
+      */
+      var active = document.getElementById(tab.getAttribute('aria-controls'));
+      var pager = document.querySelector('.projects__pagination');
+      if (active && pager) {
+        var count = active.querySelectorAll('.projects__page').length;
+        pager.hidden = count < 2;
+      }
+
       if (focus) tab.focus();
     }
 
@@ -918,6 +946,12 @@
         select(tab, false);
       });
     });
+
+    // 초기 상태에도 페이지네이션 표시 여부를 맞춘다
+    var initial = tabs.filter(function (t) {
+      return t.getAttribute('aria-selected') === 'true';
+    })[0] || tabs[0];
+    select(initial, false);
 
     // 좌우 화살표 / Home / End 키보드 조작
     tablist.addEventListener('keydown', function (e) {
@@ -1350,8 +1384,9 @@
     initHeaderScroll();
     initNavToggle();
     initSkillPanel();
-    initTabs();
+    // 갤러리 페이징이 페이지네이션을 구성한 뒤에 탭 상태를 반영해야 한다
     initGalleryPaging();
+    initTabs();
     initProjectModal();
     initPubModal();
     initCopy();

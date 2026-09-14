@@ -1617,6 +1617,10 @@
 }
 
 /* 페이지네이션 — 탭 아래 빈 공간에 배치 */
+.projects__pagination[hidden] {
+  display: none;
+}
+
 .projects__pagination {
   display: flex;
   align-items: center;
@@ -2447,4 +2451,50 @@
   font-weight: 400;
   font-size: calc(13px * var(--fs-scale));
   opacity: 0.75;
+}
+
+
+/* --------------------------------------------------------------------------
+   PUBLISHING 썸네일
+     모니터 목업 이미지를 박스에 채우면 프레임이 잘려 보기 나쁘다.
+     → 배경·테두리 없이 목업 그대로 얹는다.
+   -------------------------------------------------------------------------- */
+
+#panel-publishing .project-item {
+  aspect-ratio: auto;
+  overflow: visible;
+  border-radius: 0;
+  background: none;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+#panel-publishing .project-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.18));
+}
+
+#panel-publishing .project-item:hover {
+  transform: translateY(-4px);
+}
+
+/*
+  DESIGN 썸네일용 확대·어두운 오버레이는 목업에는 어울리지 않는다.
+  (프레임 밖까지 어두워지고 모니터가 잘려 보인다)
+*/
+#panel-publishing .project-item:hover img {
+  transform: none;
+}
+
+#panel-publishing .project-item::after {
+  content: none;
+}
+
+/* 목업이 세로로 길어 행 간격을 조금 넓힌다 */
+#panel-publishing .projects__page {
+  gap: calc(30px * var(--fs-scale)) calc(24px * var(--fs-scale));
+  align-items: start;
 }
