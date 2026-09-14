@@ -924,7 +924,7 @@
   left: var(--line-left, 30px);
   right: var(--line-right, 30px);
   /* 점 중심에서 위로 올린다 */
-  top: calc(var(--line-top, 47px) - calc(14px * var(--fs-scale)));
+  top: calc(var(--line-top, 47px) - calc(20px * var(--fs-scale)));
   height: 3px;
   translate: 0 -50%;
   background: var(--theme);
