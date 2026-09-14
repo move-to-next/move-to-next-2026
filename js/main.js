@@ -252,6 +252,28 @@
     var LINE_MS = 900; // 선이 다 그어지는 시간
     var STEP_MS = 130; // 포인트 사이 간격
 
+    /*
+      가로 선의 세로 위치를 점의 실제 중심에 맞춘다.
+      날짜 글자 높이가 배율·폰트에 따라 달라져 CSS 계산식으로는 어긋나므로,
+      렌더링된 점 위치를 직접 재서 --line-top 에 넣는다.
+    */
+    function alignLines() {
+      lines.forEach(function (tl) {
+        var dot = tl.querySelector('.timeline__marker, .timeline__dot');
+        if (!dot) return;
+        var t = tl.getBoundingClientRect();
+        var d = dot.getBoundingClientRect();
+        tl.style.setProperty('--line-top', (d.top + d.height / 2 - t.top) + 'px');
+      });
+    }
+
+    alignLines();
+    window.addEventListener('resize', alignLines);
+    // 웹폰트가 늦게 적용되면 글자 높이가 변하므로 다시 맞춘다
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(alignLines);
+    }
+
     lines.forEach(function (tl) {
       var items = tl.querySelectorAll(':scope > .reveal');
       Array.prototype.forEach.call(items, function (el, i) {

@@ -383,10 +383,10 @@
   align-items: center;
   justify-content: center;
   /* 글자가 늘어나는 만큼 박스도 함께 넓어진다 */
-  max-width: min(974px, 100%);
-  min-height: 100px;
-  margin-top: 26px;
-  padding: 18px 44px;
+  max-width: min(calc(974px * var(--fs-scale)), 100%);
+  min-height: calc(100px * var(--fs-scale));
+  margin-top: calc(26px * var(--fs-scale));
+  padding: calc(18px * var(--fs-scale)) calc(44px * var(--fs-scale));
   border-radius: var(--radius-pill);
   color: var(--c-white);
   font-weight: 300;
@@ -893,10 +893,13 @@
 
 /* 타임라인 */
 .timeline {
+  /* 점 지름 — 선 위치 계산에 함께 쓰인다 */
+  --dot: calc(30px * var(--fs-scale));
+
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin-top: 34px;
+  margin-top: calc(34px * var(--fs-scale));
   /* 항목 텍스트가 줄바꿈되지 않도록 여백을 줄인다 */
   padding-inline: 14px;
 }
@@ -908,10 +911,12 @@
 .timeline::before {
   content: "";
   position: absolute;
-  left: 30px;
-  right: 30px;
-  top: 47px;
+  left: calc(var(--dot) / 2 + 14px);
+  right: calc(var(--dot) / 2 + 14px);
+  /* 점 행의 세로 중심 — JS 없이 그리드 행 높이로 맞춘다 */
+  top: var(--line-top, 47px);
   height: 3px;
+  translate: 0 -50%;
   background: var(--theme);
   transform: scaleX(0);
   transform-origin: left center;
@@ -932,10 +937,12 @@
 .timeline__item {
   position: relative;
   z-index: 1;
-  display: flex;
-  flex-direction: column;
+  /* 날짜 / 점 / 이름 3행 — 점 행 높이를 고정해 선과 항상 맞춘다 */
+  display: grid;
+  grid-template-rows: auto var(--dot) auto;
+  justify-items: center;
   align-items: center;
-  gap: 8px;
+  gap: calc(8px * var(--fs-scale));
   /* 항목 사이 여백을 확보해 긴 학교명이 서로 겹치지 않게 한다 */
   padding-inline: 2px;
   text-align: center;
@@ -951,8 +958,8 @@
 }
 
 .timeline__dot {
-  width: 30px;
-  height: 30px;
+  width: var(--dot);
+  height: var(--dot);
 }
 
 /* --------------------------------------------------------------------------
@@ -972,8 +979,8 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: var(--dot);
+  height: var(--dot);
 }
 
 .timeline__marker .timeline__dot {
@@ -992,8 +999,8 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: var(--dot);
+  height: var(--dot);
   padding: 0;
   border-radius: 999px;
   background: var(--theme);
@@ -1151,7 +1158,7 @@
   height: calc(500px * var(--fs-scale));
   background: linear-gradient(180deg, #f2f2f2 0%, #d9d9d9 100%);
   border-radius: 14px;
-  padding: 22px 26px 26px;
+  padding: calc(22px * var(--fs-scale)) calc(26px * var(--fs-scale)) calc(26px * var(--fs-scale));
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
 }
 
@@ -1184,8 +1191,8 @@
 .keycaps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-top: 24px;
+  gap: calc(14px * var(--fs-scale));
+  margin-top: calc(24px * var(--fs-scale));
 }
 
 /*
@@ -1259,9 +1266,9 @@
   align-self: stretch;
   /* 키캡의 정사각 비율을 해제하고 납작한 바로 */
   aspect-ratio: auto;
-  height: 96px;
+  height: calc(96px * var(--fs-scale));
   flex-shrink: 0;
-  margin-top: 20px;
+  margin-top: calc(20px * var(--fs-scale));
   --key-side: #c9c6c3;
 }
 
@@ -1288,7 +1295,7 @@
 
 .skills__panel {
   position: relative;
-  height: 500px;
+  height: calc(500px * var(--fs-scale));
   background: var(--c-white);
   border: 2px solid var(--theme);
   border-radius: var(--radius-card);
@@ -1334,8 +1341,8 @@
 .skill-detail {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding: 46px 50px;
+  gap: calc(30px * var(--fs-scale));
+  padding: calc(46px * var(--fs-scale)) calc(50px * var(--fs-scale));
 }
 
 /*
@@ -1488,7 +1495,7 @@
 .projects__tabs-label {
   display: grid;
   place-items: center;
-  height: 100px;
+  height: calc(100px * var(--fs-scale));
   background: var(--c-projects-bg);
   /* 아래 탭들과 같은 구분선 */
   border-bottom: 2px solid var(--theme);
@@ -1507,9 +1514,9 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 15px;
-  height: 124px;
-  padding: 20px 30px;
+  gap: calc(15px * var(--fs-scale));
+  height: calc(124px * var(--fs-scale));
+  padding: calc(20px * var(--fs-scale)) calc(30px * var(--fs-scale));
   background: var(--c-white);
   border: 0;
   border-bottom: 2px solid var(--theme);
@@ -1561,7 +1568,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 36px 40px;
+  padding: calc(36px * var(--fs-scale)) calc(40px * var(--fs-scale));
 }
 
 .projects__pages {
@@ -1587,11 +1594,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: calc(14px * var(--fs-scale));
   /* 남는 세로 공간의 가운데로 */
   margin-top: auto;
   margin-bottom: auto;
-  padding: 24px 12px;
+  padding: calc(24px * var(--fs-scale)) calc(12px * var(--fs-scale));
 }
 
 .projects__nav {
