@@ -661,7 +661,7 @@
 .marquee__track span {
   font-family: var(--font-en);
   font-weight: 300;
-  font-size: clamp(1.5rem, 2.6vw, 46px);
+  font-size: clamp(1.5rem, 2.6vw, calc(46px * var(--fs-scale)));
   color: var(--theme);
   line-height: 1;
 }
@@ -782,7 +782,7 @@
 .rolling {
   position: relative;
   /* 넓은 화면에서는 Figma의 410px, 좁아지면 함께 줄어든다 */
-  width: clamp(240px, 28vw, 410px);
+  width: clamp(240px, 28vw, calc(410px * var(--fs-scale)));
   height: 100px;
   background: var(--theme);
   border-radius: 10px;
@@ -1133,7 +1133,10 @@
 
 .skills__card {
   display: grid;
-  grid-template-columns: 581px 60px 626px;
+  grid-template-columns:
+    calc(581px * var(--fs-scale))
+    calc(60px * var(--fs-scale))
+    calc(626px * var(--fs-scale));
   gap: 40px;
   align-items: center;
   justify-content: center;
@@ -1145,7 +1148,7 @@
 .tool-window {
   display: flex;
   flex-direction: column;
-  height: 500px;
+  height: calc(500px * var(--fs-scale));
   background: linear-gradient(180deg, #f2f2f2 0%, #d9d9d9 100%);
   border-radius: 14px;
   padding: 22px 26px 26px;
@@ -1393,7 +1396,7 @@
   --star: "★★★★★";
   position: relative;
   margin-top: 8px;
-  font-size: 26px;
+  font-size: calc(26px * var(--fs-scale));
   line-height: 1;
   letter-spacing: 2px;
   color: #ddd;
@@ -1490,7 +1493,7 @@
   /* 아래 탭들과 같은 구분선 */
   border-bottom: 2px solid var(--theme);
   font-family: var(--font-en);
-  font-size: 30px;
+  font-size: calc(30px * var(--fs-scale));
   letter-spacing: -0.02em;
   color: var(--theme);
 }
@@ -1513,7 +1516,7 @@
   border-radius: 0;
   font-family: var(--font-en);
   font-weight: 700;
-  font-size: 25px;
+  font-size: calc(25px * var(--fs-scale));
   letter-spacing: -0.02em;
   color: var(--theme);
   transition: background-color var(--dur-fast) var(--ease-out),
@@ -1777,7 +1780,7 @@
 .contact__mail {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(2rem, 4.4vw, 72px);
+  font-size: clamp(2rem, 4.4vw, calc(72px * var(--fs-scale)));
   letter-spacing: -0.03em;
   line-height: 1;
   color: var(--c-white);

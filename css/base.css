@@ -36,24 +36,28 @@
   --font-kr: "Pretendard Variable", Pretendard, -apple-system,
     "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 
-  /* --- 타이포 스케일 (Figma 1920 기준 px) --- */
-  --fs-hero: 96px;
-  --fs-section-title: 68px;
-  --fs-56: 56px;
-  --fs-50: 50px;
-  --fs-48: 48px;
-  --fs-40: 40px;
-  --fs-36: 36px;
-  --fs-32: 32px;
-  --fs-28: 28px;
-  --fs-24: 24px;
-  --fs-20: 20px;
-  --fs-18: 18px;
-  --fs-16: 16px;
+  /* --- 타이포 스케일 (Figma 1920 기준 px) ---
+     1920 초과 모니터에서는 --fs-scale 이 1보다 커지며 전체가 함께 커진다.
+     아래 "와이드 모니터 대응" 블록 참고. */
+  --fs-scale: 1;
+
+  --fs-hero: calc(96px * var(--fs-scale));
+  --fs-section-title: calc(68px * var(--fs-scale));
+  --fs-56: calc(56px * var(--fs-scale));
+  --fs-50: calc(50px * var(--fs-scale));
+  --fs-48: calc(48px * var(--fs-scale));
+  --fs-40: calc(40px * var(--fs-scale));
+  --fs-36: calc(36px * var(--fs-scale));
+  --fs-32: calc(32px * var(--fs-scale));
+  --fs-28: calc(28px * var(--fs-scale));
+  --fs-24: calc(24px * var(--fs-scale));
+  --fs-20: calc(20px * var(--fs-scale));
+  --fs-18: calc(18px * var(--fs-scale));
+  --fs-16: calc(16px * var(--fs-scale));
 
   /* --- 레이아웃 --- */
   --header-h: 80px;
-  --content-w: 1460px; /* 1920 - 230*2 */
+  --content-w: calc(1460px * var(--fs-scale)); /* 1920 기준 1920 - 230*2 */
   --side-pad: 230px;
 
   /* --- 형태 --- */
