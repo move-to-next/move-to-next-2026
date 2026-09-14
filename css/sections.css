@@ -1697,7 +1697,7 @@
 }
 
 .project-item:hover img {
-  transform: scale(1.06);
+  transform: none;
 }
 
 /* 호버 시 어두운 오버레이 */
@@ -2461,8 +2461,12 @@
    -------------------------------------------------------------------------- */
 
 #panel-publishing .project-item {
-  /* DESIGN 썸네일과 같은 칸 비율 — 갤러리 높이를 맞춘다 */
-  aspect-ratio: 330 / 200;
+  /*
+    칸을 목업 이미지와 같은 비율로 맞춘다.
+    칸이 더 넓으면 contain 이 좌우에 빈 공간을 만들어
+    간격이 들쭉날쭉해 보인다.
+  */
+  aspect-ratio: 941 / 727;
   overflow: visible;
   border-radius: 0;
   background: none;
@@ -2470,17 +2474,17 @@
 }
 
 /*
-  목업은 잘리지 않게 칸 안에 맞추되(contain), 칸보다 조금 키워
-  세로 여백을 줄인다. 목업 비율(0.77)이 칸(1.65)보다 세로로 길어
-  가로가 넘칠 일은 없다.
+  목업은 잘리지 않게 칸 안에 맞춘다(contain).
+  칸보다 키울 때 음수 margin 을 쓰면 한쪽으로만 밀려 배치가 쏠리므로,
+  중심을 유지하는 scale 을 쓴다.
 */
 #panel-publishing .project-item img {
   display: block;
-  width: 118%;
-  height: 118%;
-  margin: -9% 0 0 -9%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   border-radius: 0;
+  transform: none;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.18));
 }
 
@@ -2493,6 +2497,7 @@
   (프레임 밖까지 어두워지고 모니터가 잘려 보인다)
 */
 #panel-publishing .project-item:hover img {
+  /* 확대 효과는 끄되, 칸을 채우는 기본 배율은 유지한다 */
   transform: none;
 }
 
@@ -2502,4 +2507,6 @@
 
 #panel-publishing .projects__page {
   align-items: center;
+  /* 목업이 칸을 꽉 채워 기본 간격으로는 서로 붙어 보인다 */
+  gap: calc(34px * var(--fs-scale)) calc(30px * var(--fs-scale));
 }
