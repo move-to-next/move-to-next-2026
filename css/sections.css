@@ -2461,17 +2461,24 @@
    -------------------------------------------------------------------------- */
 
 #panel-publishing .project-item {
-  aspect-ratio: auto;
+  /* DESIGN 썸네일과 같은 칸 비율 — 갤러리 높이를 맞춘다 */
+  aspect-ratio: 330 / 200;
   overflow: visible;
   border-radius: 0;
   background: none;
   transition: transform var(--dur-fast) var(--ease-out);
 }
 
+/*
+  목업은 잘리지 않게 칸 안에 맞추되(contain), 칸보다 조금 키워
+  세로 여백을 줄인다. 목업 비율(0.77)이 칸(1.65)보다 세로로 길어
+  가로가 넘칠 일은 없다.
+*/
 #panel-publishing .project-item img {
   display: block;
-  width: 100%;
-  height: auto;
+  width: 118%;
+  height: 118%;
+  margin: -9% 0 0 -9%;
   object-fit: contain;
   border-radius: 0;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.18));
@@ -2493,8 +2500,6 @@
   content: none;
 }
 
-/* 목업이 세로로 길어 행 간격을 조금 넓힌다 */
 #panel-publishing .projects__page {
-  gap: calc(30px * var(--fs-scale)) calc(24px * var(--fs-scale));
-  align-items: start;
+  align-items: center;
 }
