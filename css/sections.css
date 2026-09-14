@@ -2187,3 +2187,264 @@
 .is-modal-open {
   overflow: hidden;
 }
+
+
+/* ==========================================================================
+   퍼블리싱 상세 모달
+
+   좌: 풀페이지(세로 최대 6000px+ → 틀 안에서 스크롤)
+   우: 기기 목업 3종. 이미지에 이미 모니터·태블릿·폰 프레임이
+       그려져 있으므로 겹쳐 배치만 한다.
+   ========================================================================== */
+
+.pub-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+}
+
+.pub-modal[hidden] {
+  display: none;
+}
+
+.pub-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 20, 16, 0.6);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  cursor: pointer;
+}
+
+.pub-modal__panel {
+  position: relative;
+  width: min(max(1040px, 60vw), 1700px, 100%);
+  max-height: min(88vh, 1500px);
+  background: #f7f5e9;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.pub-modal__scroll {
+  max-height: inherit;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: calc(44px * var(--fs-scale)) calc(48px * var(--fs-scale));
+}
+
+.pub-modal__close {
+  position: absolute;
+  top: calc(18px * var(--fs-scale));
+  right: calc(20px * var(--fs-scale));
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: calc(38px * var(--fs-scale));
+  height: calc(38px * var(--fs-scale));
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+  font-size: calc(26px * var(--fs-scale));
+  line-height: 1;
+  color: #444;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.pub-modal__close:hover {
+  background: rgba(0, 0, 0, 0.14);
+}
+
+/* --- 제목 + 정보 --- */
+
+.pub-modal__title {
+  display: flex;
+  align-items: center;
+  gap: calc(12px * var(--fs-scale));
+  font-weight: 700;
+  font-size: calc(28px * var(--fs-scale));
+  letter-spacing: -0.03em;
+  color: #111;
+}
+
+.pub-modal__badge {
+  flex-shrink: 0;
+  padding: calc(6px * var(--fs-scale)) calc(16px * var(--fs-scale));
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font-weight: 500;
+  font-size: calc(14px * var(--fs-scale));
+  letter-spacing: -0.02em;
+}
+
+.pub-modal__meta {
+  margin-top: calc(18px * var(--fs-scale));
+  display: grid;
+  gap: calc(6px * var(--fs-scale));
+}
+
+.pub-modal__row {
+  display: flex;
+  gap: calc(8px * var(--fs-scale));
+  font-size: calc(16px * var(--fs-scale));
+  letter-spacing: -0.02em;
+  color: #222;
+}
+
+.pub-modal__row dt {
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pub-modal__row dt::after {
+  content: " -";
+}
+
+/* --- 본문 2단 --- */
+
+.pub-modal__body {
+  margin-top: calc(28px * var(--fs-scale));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: calc(28px * var(--fs-scale));
+  align-items: start;
+  padding: calc(24px * var(--fs-scale));
+  border: 1px solid #ddd8c4;
+  border-radius: calc(12px * var(--fs-scale));
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.pub-shot,
+.pub-device {
+  margin: 0;
+  min-width: 0;
+}
+
+.pub-shot__label {
+  margin-bottom: calc(10px * var(--fs-scale));
+  font-family: var(--font-en);
+  font-weight: 700;
+  font-size: calc(13px * var(--fs-scale));
+  letter-spacing: 0.08em;
+  color: #8a8570;
+}
+
+/* 풀페이지 — 상단 일부만 보이고 안에서 스크롤 */
+.pub-shot__frame {
+  height: calc(420px * var(--fs-scale));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+  border: 1px solid #e2ddcb;
+  border-radius: calc(8px * var(--fs-scale));
+}
+
+.pub-shot__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pub-shot__frame::-webkit-scrollbar {
+  width: 9px;
+}
+
+.pub-shot__frame::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 999px;
+  border: 3px solid #fff;
+}
+
+/* --- 기기 목업 겹침 --- */
+
+/* 시안이 없는 기기는 확실히 감춘다 */
+.pub-device__stage img[hidden] {
+  display: none !important;
+}
+
+.pub-device__stage {
+  position: relative;
+  height: calc(420px * var(--fs-scale));
+  /* 라벨과 목업이 붙지 않도록 */
+  margin-top: calc(4px * var(--fs-scale));
+}
+
+/* PC 를 바닥에 크게 깔고 */
+.pub-device__pc {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  translate: 0 -50%;
+  width: 78%;
+  height: auto;
+}
+
+/* 태블릿을 오른쪽 끝에 */
+.pub-device__tablet {
+  position: absolute;
+  right: 0;
+  bottom: 4%;
+  width: 31%;
+  height: auto;
+}
+
+/*
+  모바일은 태블릿 왼쪽 모서리에 살짝 걸치게 둔다.
+  더 오른쪽에 두면 태블릿 화면을 가려 두 기기 모두 안 보인다.
+*/
+.pub-device__mobile {
+  position: absolute;
+  right: 30%;
+  bottom: 0;
+  width: 15%;
+  height: auto;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.25));
+}
+
+/* 시안이 PC 뿐이면 가운데 크게 */
+.pub-device__stage.is-single .pub-device__pc {
+  left: 50%;
+  translate: -50% -50%;
+  width: 92%;
+}
+
+/* --- 하단 버튼 --- */
+
+.pub-modal__foot {
+  margin-top: calc(26px * var(--fs-scale));
+  display: flex;
+  justify-content: center;
+  gap: calc(14px * var(--fs-scale));
+}
+
+.pub-btn {
+  display: inline-flex;
+  align-items: baseline;
+  gap: calc(7px * var(--fs-scale));
+  padding: calc(14px * var(--fs-scale)) calc(30px * var(--fs-scale));
+  border-radius: calc(6px * var(--fs-scale));
+  font-weight: 700;
+  font-size: calc(17px * var(--fs-scale));
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.pub-btn--solid {
+  background: #111;
+  color: #fff;
+}
+
+.pub-btn:hover {
+  opacity: 0.82;
+}
+
+.pub-btn__sub {
+  font-weight: 400;
+  font-size: calc(13px * var(--fs-scale));
+  opacity: 0.75;
+}

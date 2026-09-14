@@ -690,17 +690,37 @@
 
             </div>
 
-            <!-- PUBLISHING 패널 -->
-            <!-- TODO: 퍼블리싱 작업물이 정해지면 project-item 으로 채우기 -->
+            <!-- PUBLISHING 패널 — 퍼블리싱 작업물 6개 -->
             <div
-              class="projects__gallery tabpanel reveal-group"
+              class="projects__gallery tabpanel"
               id="panel-publishing"
               role="tabpanel"
               aria-labelledby="tab-publishing"
               tabindex="0"
               hidden
             >
-              <p class="projects__empty">준비 중입니다.</p>
+              <div class="projects__pages">
+                <div class="projects__page reveal-group">
+                  <button class="project-item reveal" type="button" data-pub="durugraphite">
+                    <img src="assets/images/projects/durugraphite-pc.webp" alt="두루 그라파이트 홈페이지" loading="lazy">
+                  </button>
+                  <button class="project-item reveal" type="button" data-pub="nomia">
+                    <img src="assets/images/projects/nomia-pc.webp" alt="노미아 홈페이지" loading="lazy">
+                  </button>
+                  <button class="project-item reveal" type="button" data-pub="janggun">
+                    <img src="assets/images/projects/janggun-pc.webp" alt="장군 홈페이지" loading="lazy">
+                  </button>
+                  <button class="project-item reveal" type="button" data-pub="guardk">
+                    <img src="assets/images/projects/guardk-pc.webp" alt="가드케이 홈페이지" loading="lazy">
+                  </button>
+                  <button class="project-item reveal" type="button" data-pub="burgerking">
+                    <img src="assets/images/projects/burgerking-pc.webp" alt="버거킹 리뉴얼" loading="lazy">
+                  </button>
+                  <button class="project-item reveal" type="button" data-pub="newbalance">
+                    <img src="assets/images/projects/newbalance-pc.webp" alt="뉴발란스 리뉴얼" loading="lazy">
+                  </button>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -798,6 +818,54 @@
 
       <div class="project-modal__body">
         <img class="project-modal__img" src="" alt="">
+      </div>
+    </div>
+  </div>
+
+
+  <!--
+    퍼블리싱 상세 보기.
+    좌: 풀페이지(세로가 길어 안에서 스크롤) / 우: 기기 목업 3종
+    내용은 js/main.js 의 PUB_DATA 에서 채운다.
+  -->
+  <div class="pub-modal" id="pub-modal" hidden>
+    <div class="pub-modal__backdrop" data-close></div>
+
+    <div class="pub-modal__panel" role="dialog" aria-modal="true" aria-labelledby="pub-modal-title">
+      <button class="pub-modal__close" type="button" data-close aria-label="닫기">&times;</button>
+
+      <div class="pub-modal__scroll">
+        <header class="pub-modal__head">
+          <h3 class="pub-modal__title" id="pub-modal-title"></h3>
+          <dl class="pub-modal__meta"></dl>
+        </header>
+
+        <div class="pub-modal__body">
+          <!-- 풀페이지 — 상단부터 보이고 안에서 스크롤 -->
+          <figure class="pub-shot">
+            <figcaption class="pub-shot__label">FULL PAGE</figcaption>
+            <div class="pub-shot__frame">
+              <img class="pub-shot__img" src="" alt="">
+            </div>
+          </figure>
+
+          <!-- 기기 목업 — PC 뒤, 태블릿·모바일 앞에 겹친다 -->
+          <figure class="pub-device">
+            <figcaption class="pub-shot__label">DEVICE</figcaption>
+            <div class="pub-device__stage">
+              <img class="pub-device__pc" src="" alt="PC 화면">
+              <img class="pub-device__tablet" src="" alt="태블릿 화면">
+              <img class="pub-device__mobile" src="" alt="모바일 화면">
+            </div>
+          </figure>
+        </div>
+
+        <footer class="pub-modal__foot">
+          <a class="pub-btn pub-btn--solid" href="#" target="_blank" rel="noopener">사이트이동</a>
+          <a class="pub-btn pub-btn--solid" href="#" target="_blank" rel="noopener">
+            작업과정 <span class="pub-btn__sub">figma</span>
+          </a>
+        </footer>
       </div>
     </div>
   </div>

@@ -413,6 +413,27 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
+
+  /* --- 퍼블리싱 모달 : 2단 → 1단 --- */
+  .pub-modal__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* 1단에서는 목업이 가로로 넓어져 높이도 함께 늘려야 한다 */
+  .pub-device__stage {
+    height: 46vw;
+    max-height: 440px;
+    min-height: 260px;
+  }
+
+  /*
+    PC 를 세로 가운데(top:50%)에 두면 목업이 stage 위로 삐져나와
+    DEVICE 라벨을 덮는다. 좁은 화면에서는 위 기준으로 붙인다.
+  */
+  .pub-device__pc {
+    top: 0;
+    translate: 0 0;
+  }
 }
 
 /* --------------------------------------------------------------------------

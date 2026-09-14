@@ -700,6 +700,190 @@
     });
   }
 
+  /* ------------------------------------------------------------------------
+     퍼블리싱 작업물 데이터
+       ※ 두루 그라파이트 외에는 임시(목업) 값이다. 실제 정보로 교체할 것.
+     ------------------------------------------------------------------------ */
+  var PUB_DATA = {
+    durugraphite: {
+      name: '두루 그라파이트 홈페이지',
+      badge: '포트폴리오',
+      role: '디자인 100%, 퍼블리싱 100%',
+      scope: '메인페이지, 서브페이지',
+      tools: 'HTML5, CSS, PHP(Gnuboard), Figma',
+      period: '26.03.02 ~ 26.03.09 (8일)',
+      site: '#',
+      figma: '#',
+      devices: ['pc', 'tablet', 'mobile']
+    },
+    nomia: {
+      name: '노미아 홈페이지',
+      badge: '포트폴리오',
+      role: '디자인 100%, 퍼블리싱 100%',
+      scope: '메인페이지, 서브페이지',
+      tools: 'HTML5, CSS, JavaScript, Figma',
+      period: '26.02.10 ~ 26.02.20 (11일)',
+      site: '#',
+      figma: '#',
+      devices: ['pc', 'tablet', 'mobile']
+    },
+    janggun: {
+      name: '장군 홈페이지',
+      badge: '포트폴리오',
+      role: '디자인 100%, 퍼블리싱 100%',
+      scope: '메인페이지, 서브페이지',
+      tools: 'HTML5, CSS, PHP(Gnuboard), Figma',
+      period: '26.01.15 ~ 26.01.24 (10일)',
+      site: '#',
+      figma: '#',
+      devices: ['pc', 'tablet', 'mobile']
+    },
+    guardk: {
+      name: '가드케이 홈페이지',
+      badge: '포트폴리오',
+      role: '디자인 100%, 퍼블리싱 100%',
+      scope: '메인페이지',
+      tools: 'HTML5, CSS, JavaScript, Figma',
+      period: '25.12.08 ~ 25.12.15 (8일)',
+      site: '#',
+      figma: '#',
+      devices: ['pc', 'tablet', 'mobile']
+    },
+    burgerking: {
+      name: '버거킹 리뉴얼',
+      badge: '리뉴얼',
+      role: '디자인 100%, 퍼블리싱 100%',
+      scope: '메인페이지, 서브페이지',
+      tools: 'HTML5, CSS, JavaScript, Figma',
+      period: '25.11.03 ~ 25.11.12 (10일)',
+      site: '#',
+      figma: '#',
+      devices: ['pc', 'tablet', 'mobile']
+    },
+    newbalance: {
+      name: '뉴발란스 리뉴얼',
+      badge: '리뉴얼',
+      role: '디자인 100%, 퍼블리싱 100%',
+      scope: '메인페이지',
+      tools: 'HTML5, CSS, JavaScript, Figma',
+      period: '25.10.06 ~ 25.10.13 (8일)',
+      site: '#',
+      figma: '#',
+      // 태블릿·모바일 시안은 제작하지 않았다
+      devices: ['pc']
+    }
+  };
+
+  /* ------------------------------------------------------------------------
+     퍼블리싱 상세 모달
+     ------------------------------------------------------------------------ */
+  function initPubModal() {
+    var modal = document.getElementById('pub-modal');
+    if (!modal) return;
+
+    var items = Array.prototype.slice.call(
+      document.querySelectorAll('.project-item[data-pub]')
+    );
+    if (!items.length) return;
+
+    var elTitle = modal.querySelector('.pub-modal__title');
+    var elMeta = modal.querySelector('.pub-modal__meta');
+    var elFull = modal.querySelector('.pub-shot__img');
+    var elFrame = modal.querySelector('.pub-shot__frame');
+    var elStage = modal.querySelector('.pub-device__stage');
+    var elPc = modal.querySelector('.pub-device__pc');
+    var elTablet = modal.querySelector('.pub-device__tablet');
+    var elMobile = modal.querySelector('.pub-device__mobile');
+    var links = modal.querySelectorAll('.pub-modal__foot .pub-btn');
+    var scroll = modal.querySelector('.pub-modal__scroll');
+
+    var lastFocused = null;
+
+    function row(dt, dd) {
+      return '<div class="pub-modal__row"><dt>' + dt + '</dt><dd>' + dd + '</dd></div>';
+    }
+
+    function open(key, btn) {
+      var d = PUB_DATA[key];
+      if (!d) return;
+      lastFocused = btn;
+
+      elTitle.innerHTML =
+        d.name + ' <span class="pub-modal__badge">' + d.badge + '</span>';
+
+      elMeta.innerHTML =
+        row('기여도', d.role) +
+        row('작업영역', d.scope) +
+        row('사용 툴', d.tools) +
+        row('제작기간', d.period);
+
+      var base = 'assets/images/projects/' + key + '-';
+      elFull.src = base + 'fullpage.webp';
+      elFull.alt = d.name + ' 전체 화면';
+
+      // 시안이 있는 기기만 보여준다 (뉴발란스는 PC 뿐)
+      var has = function (n) { return d.devices.indexOf(n) > -1; };
+      elPc.src = base + 'pc.webp';
+
+      /*
+        시안이 없는 기기는 src 까지 비운다.
+        hidden 만 걸면 앞서 연 모달의 src 가 남아 깨진 이미지로 보인다.
+      */
+      function setDevice(el, name) {
+        if (has(name)) {
+          el.src = base + name + '.webp';
+          el.hidden = false;
+        } else {
+          el.removeAttribute('src');
+          el.hidden = true;
+        }
+      }
+      setDevice(elTablet, 'tablet');
+      setDevice(elMobile, 'mobile');
+
+      // 기기가 PC 뿐이면 겹침 배치가 필요 없다
+      elStage.classList.toggle('is-single', d.devices.length === 1);
+
+      links[0].href = d.site;
+      links[1].href = d.figma;
+
+      modal.hidden = false;
+      document.documentElement.classList.add('is-modal-open');
+
+      // 항상 위에서부터
+      if (scroll) scroll.scrollTop = 0;
+      if (elFrame) elFrame.scrollTop = 0;
+
+      var closeBtn = modal.querySelector('.pub-modal__close');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function close() {
+      modal.hidden = true;
+      document.documentElement.classList.remove('is-modal-open');
+      // 메모리 절약 — 닫으면 이미지를 놓아준다
+      [elFull, elPc, elTablet, elMobile].forEach(function (el) {
+        if (el) el.removeAttribute('src');
+      });
+      if (lastFocused) lastFocused.focus();
+    }
+
+    items.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        open(btn.getAttribute('data-pub'), btn);
+      });
+    });
+
+    Array.prototype.forEach.call(
+      modal.querySelectorAll('[data-close]'),
+      function (el) { el.addEventListener('click', close); }
+    );
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) close();
+    });
+  }
+
   function initTabs() {
     var tablist = document.querySelector('.projects__tabs[role="tablist"]');
     if (!tablist) return;
@@ -1169,6 +1353,7 @@
     initTabs();
     initGalleryPaging();
     initProjectModal();
+    initPubModal();
     initCopy();
     initSectionDots();
     initToTop();
