@@ -305,9 +305,9 @@
   .timeline::before {
     left: 12px;
     right: auto;
-    /* 첫/마지막 점 중심 — JS 가 실측해 넣는다 */
-    top: var(--line-top, 32px);
-    bottom: var(--line-bottom, 32px);
+    /* 첫 항목 중앙에서 시작해 마지막 항목 중앙에서 끝난다 */
+    top: 11px;
+    bottom: 11px;
     width: 2px;
     height: auto;
     translate: -50% 0;
@@ -340,6 +340,9 @@
   .timeline__marker {
     position: absolute;
     left: -50px;
+    /* 항목 세로 중앙에 고정 — 점이 컨테이너 밖으로 나가지 않는다 */
+    top: 50%;
+    translate: 0 -50%;
     width: 24px;
     height: 24px;
   }

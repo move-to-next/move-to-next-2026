@@ -282,12 +282,11 @@
         }
 
         /*
-          세로(1023px 이하) 배치 — 선이 첫 점 중심에서 시작해
-          마지막 점 중심에서 끝나도록 실측해 넣는다.
-          (고정 px 로는 항목 수·높이에 따라 계속 어긋난다)
+          세로(1023px 이하) 배치 — 점이 항목 세로 중앙에 고정돼
+          CSS 의 top/bottom 11px 로 정확히 맞는다. JS 는 관여하지 않는다.
         */
-        tl.style.setProperty('--line-top', (first.top + first.height / 2 - t.top) + 'px');
-        tl.style.setProperty('--line-bottom', (t.bottom - (last.top + last.height / 2)) + 'px');
+        tl.style.removeProperty('--line-top');
+        tl.style.removeProperty('--line-bottom');
       });
     }
 
