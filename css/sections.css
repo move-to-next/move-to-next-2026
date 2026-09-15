@@ -923,8 +923,11 @@
   /* 첫 점 ~ 마지막 점 중심 (JS 가 실측해 넣는다) */
   left: var(--line-left, 30px);
   right: var(--line-right, 30px);
-  /* 점 중심에서 위로 올린다 */
-  top: calc(var(--line-top, 47px) - calc(23px * var(--fs-scale)));
+  /*
+    점 중심에서 위로 올리되 점 안에 머물게 한다.
+    --dot 의 30% (반지름의 60%) 만큼만 올려 선이 원 윗부분을 지난다.
+  */
+  top: calc(var(--line-top, 47px) - var(--dot) * 0.3);
   height: 3px;
   translate: 0 -50%;
   background: var(--theme);
