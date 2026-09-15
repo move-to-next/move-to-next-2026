@@ -632,9 +632,12 @@
       var flat = origin.reduce(function (acc, g) { return acc.concat(g); }, []);
       var isMobile = window.matchMedia(MOBILE).matches;
 
-      // 이미 원하는 형태면 다시 만들지 않는다
+      // 이미 원하는 형태면 페이지는 그대로 두고 점만 맞춘다
       var want = isMobile ? Math.ceil(flat.length / PER_MOBILE) : origin.length;
-      if (box.__mobile === isMobile && box.children.length === want) return;
+      if (box.__mobile === isMobile && box.children.length === want) {
+        syncDots(wrap, want);
+        return;
+      }
       box.__mobile = isMobile;
 
       var groups = isMobile
@@ -653,23 +656,29 @@
         box.appendChild(page);
       });
 
-      /*
-        점 개수를 페이지 수에 맞춘다.
-        갤러리가 여러 개지만 점 컨테이너는 공용이므로,
-        지금 보이는 패널의 것만 갱신한다.
-      */
+      syncDots(wrap, groups.length);
+    }
+
+    /*
+      점 개수를 페이지 수에 맞춘다.
+      갤러리가 여러 개지만 점 컨테이너는 공용이라,
+      지금 보이는 패널 기준으로만 다시 만든다.
+    */
+    function syncDots(wrap, count) {
+      if (wrap.hidden) return;
       var scope = wrap.closest('.projects__inner') || document;
       var dotBox = scope.querySelector('.projects__dots');
-      if (dotBox && !wrap.hidden) {
-        dotBox.textContent = '';
-        groups.forEach(function (_, i) {
-          var b = document.createElement('button');
-          b.className = 'projects__page-dot' + (i === 0 ? ' is-active' : '');
-          b.type = 'button';
-          b.setAttribute('data-page', String(i));
-          b.setAttribute('aria-label', (i + 1) + '페이지 보기');
-          dotBox.appendChild(b);
-        });
+      if (!dotBox) return;
+      if (dotBox.children.length === count) return;
+
+      dotBox.textContent = '';
+      for (var i = 0; i < count; i++) {
+        var b = document.createElement('button');
+        b.className = 'projects__page-dot' + (i === 0 ? ' is-active' : '');
+        b.type = 'button';
+        b.setAttribute('data-page', String(i));
+        b.setAttribute('aria-label', (i + 1) + '페이지 보기');
+        dotBox.appendChild(b);
       }
     }
 
@@ -694,6 +703,13 @@
     wraps.forEach(function (wrap) {
       repaginate(wrap);
       relocatePager(wrap);
+
+      /*
+        조작부(화살표·점)는 갤러리들이 공유한다.
+        숨은 갤러리까지 리스너를 걸면 나중 것이 이겨
+        페이지 수가 뒤섞인다. 보이는 갤러리만 연결한다.
+      */
+      if (wrap.hidden) return;
 
       var pages = Array.prototype.slice.call(
         wrap.querySelectorAll('.projects__page')
@@ -722,17 +738,30 @@
       var current = 0;
 
       function render() {
+        // 재분할 후에도 최신 페이지를 반영하도록 매번 다시 읽는다
+        pages = Array.prototype.slice.call(
+          wrap.querySelectorAll('.projects__page')
+        );
+        if (current > pages.length - 1) current = pages.length - 1;
+        if (current < 0) current = 0;
+
         pages.forEach(function (p, i) {
           p.hidden = i !== current;
         });
-        dots.forEach(function (d, i) {
-          d.classList.toggle('is-active', i === current);
-          d.setAttribute('aria-current', i === current ? 'true' : 'false');
-        });
-        navs.forEach(function (n) {
-          var dir = n.getAttribute('data-dir');
-          n.disabled = dir === 'prev' ? current === 0 : current === pages.length - 1;
-        });
+        Array.prototype.forEach.call(
+          scope.querySelectorAll('.projects__page-dot'),
+          function (d, i) {
+            d.classList.toggle('is-active', i === current);
+            d.setAttribute('aria-current', i === current ? 'true' : 'false');
+          }
+        );
+        Array.prototype.forEach.call(
+          scope.querySelectorAll('.projects__nav'),
+          function (n) {
+            var dir = n.getAttribute('data-dir');
+            n.disabled = dir === 'prev' ? current === 0 : current === pages.length - 1;
+          }
+        );
 
         /*
           새로 보이는 페이지의 썸네일을 다시 등장시킨다.
@@ -758,6 +787,11 @@
       });
 
       navs.forEach(function (n) {
+        // 재호출 시 리스너가 중복 등록되지 않도록 새 노드로 교체
+        var fresh = n.cloneNode(true);
+        n.parentNode.replaceChild(fresh, n);
+        n = fresh;
+
         n.addEventListener('click', function () {
           var dir = n.getAttribute('data-dir');
           current += dir === 'prev' ? -1 : 1;
@@ -1069,10 +1103,12 @@
       });
 
       /*
-        페이지네이션은 탭 영역에 하나뿐이다.
-        활성 패널이 한 페이지짜리면(PUBLISHING) 감춘다.
+        페이지네이션은 탭 영역에 하나뿐이라 갤러리마다 다시 만들어야 한다.
+        (탭을 바꿔도 앞 갤러리의 점·화살표 상태가 남아 있었다)
       */
       var active = document.getElementById(tab.getAttribute('aria-controls'));
+      if (active) initGalleryPaging();
+
       var pager = document.querySelector('.projects__pagination');
       if (active && pager) {
         var count = active.querySelectorAll('.projects__page').length;
