@@ -865,6 +865,61 @@
   }
 
   /* --- PROJECTS --- */
+  /*
+    탭을 한 줄로 눕히면 PUBLISHING 이 화면 밖으로 밀려 잘린다.
+    PREVIEW(라벨)는 위, DESIGN/PUBLISHING 은 아래 한 줄에 반씩.
+  */
+  .projects__tabs {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .projects__tabs-label {
+    /* 한 줄 전체를 차지해 아래 탭과 분리된다 */
+    flex: 1 0 100%;
+    text-align: center;
+  }
+
+  .tab {
+    /* 둘이 한 줄을 나눠 갖는다 */
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    padding: 0 10px;
+    font-size: 15px;
+  }
+
+  .tab__name {
+    white-space: nowrap;
+  }
+
+  .tab__arrow {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  /* 페이지네이션이 탭과 같은 줄에 끼어 PUBLISHING 을 좁힌다 */
+  .projects__pagination {
+    flex: 1 0 100%;
+    order: 3;
+    justify-content: center;
+    padding-top: 4px;
+  }
+
+  /* 썸네일이 너무 작아 내용이 안 보인다 — 1열로 크게 */
+  .projects__page {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  #panel-publishing .projects__page {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
   .projects__card {
     padding: 20px;
   }
