@@ -2527,50 +2527,102 @@
 
 
 /* ==========================================================================
-   ABOUT 타이틀 — 디자인 툴 크기 조절 느낌의 등장
+   ABOUT 타이틀 — 디자인 툴에서 사각형을 그리는 듯한 등장
 
-   작은 상태에서 원래 크기로 커진다.
-   핸들(모서리 사각형)은 함께 커지면 "크기 조절" 느낌이 사라지므로
-   역배율을 걸어 크기를 유지한다.
+   순서: (1) 박스가 왼쪽 위에서 오른쪽으로 펴진다
+        (2) 이어서 아래로 늘어난다
+        (3) 박스가 완성된 뒤 텍스트가 페이드인
+
+   scale 로 늘리면 글자까지 찌그러지므로 clip-path 로 "드러내는"
+   방식을 쓴다. 박스 자체 크기는 처음부터 최종값이라 레이아웃도
+   흔들리지 않는다.
    ========================================================================== */
 
-.about__head .section-title {
-  /* 확대 기준점을 왼쪽 중앙으로 — 왼쪽 정렬을 유지한 채 커진다 */
-  transform-origin: left center;
-}
-
-.about__head .section-title {
-  transform: scale(1);
-  transition: transform 900ms var(--ease-out) var(--reveal-delay, 0ms);
-}
-
-/* 등장 전 — 작은 상태 (기본 선언보다 뒤에 와야 적용된다) */
-.about__head.reveal:not(.is-visible) .section-title {
-  transform: scale(0.72);
+/*
+  가로 → 세로 순서로 펴려면 중간 지점이 필요하므로 keyframes 를 쓴다.
+  (transition 은 두 값이 동시에 보간되어 대각선으로 펴진다)
+*/
+@keyframes about-title-draw {
+  0% {
+    clip-path: inset(0 100% calc(100% - 4px) 0);
+  }
+  10% {
+    /* 왼쪽 위에 얇은 선이 생긴다 */
+    clip-path: inset(0 100% calc(100% - 4px) 0);
+  }
+  55% {
+    /* 가로로 다 펴진 얇은 막대 */
+    clip-path: inset(0 0 calc(100% - 4px) 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 /*
-  핸들 역보정 — 박스가 0.72배일 때 핸들은 1/0.72 배로 키워
-  화면상 크기가 변하지 않게 한다.
+  배경을 별도 레이어로 분리한다.
+  .section-title 에 직접 clip 을 걸면 바깥(-10px)의 핸들까지 잘린다.
 */
+.about__head .section-title {
+  background-color: transparent;
+}
+
+.about__head .section-title__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--theme);
+  clip-path: inset(0 0 0 0);
+}
+
+.about__head.reveal.is-visible .section-title__bg {
+  animation: about-title-draw 820ms var(--ease-out) var(--reveal-delay, 0ms) both;
+}
+
+.about__head.reveal:not(.is-visible) .section-title__bg {
+  clip-path: inset(0 100% calc(100% - 4px) 0);
+}
+
+/* 텍스트 — 박스가 다 그려진 뒤 나타난다 */
+.about__head .section-title__text {
+  opacity: 1;
+  transition: opacity 420ms var(--ease-out) calc(var(--reveal-delay, 0ms) + 780ms);
+}
+
+.about__head.reveal:not(.is-visible) .section-title__text {
+  opacity: 0;
+  transition-delay: 0ms;
+}
+
+/* 핸들 — 텍스트와 함께 나타난다 (박스를 다 그린 뒤 선택된 느낌) */
 .about__head .section-title::before,
 .about__head .section-title::after,
 .about__head .section-title > .section-title__handles::before,
 .about__head .section-title > .section-title__handles::after {
-  transition: scale 900ms var(--ease-out) var(--reveal-delay, 0ms);
+  opacity: 1;
+  transition: opacity 320ms var(--ease-out) calc(var(--reveal-delay, 0ms) + 860ms);
 }
 
 .about__head.reveal:not(.is-visible) .section-title::before,
 .about__head.reveal:not(.is-visible) .section-title::after,
 .about__head.reveal:not(.is-visible) .section-title > .section-title__handles::before,
 .about__head.reveal:not(.is-visible) .section-title > .section-title__handles::after {
-  scale: 1.389; /* 1 / 0.72 */
+  opacity: 0;
+  transition-delay: 0ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about__head .section-title,
-  .about__head.reveal:not(.is-visible) .section-title {
-    transform: none;
+  .about__head .section-title__bg,
+  .about__head.reveal.is-visible .section-title__bg,
+  .about__head.reveal:not(.is-visible) .section-title__bg {
+    clip-path: none;
+    animation: none;
+    transition: none;
+  }
+
+  .about__head .section-title__text,
+  .about__head.reveal:not(.is-visible) .section-title__text {
+    opacity: 1;
     transition: none;
   }
 }
