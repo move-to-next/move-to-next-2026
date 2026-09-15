@@ -1258,9 +1258,13 @@
   transition: transform var(--dur-fast) var(--ease-out);
 }
 
-/* 눌림 — 윗면이 내려앉는다 */
+/*
+  hover — 쉬는 높이에서 살짝만 내려간다.
+  고정 px 을 쓰면 쉬는 높이(배율에 따라 -9 ~ -11.7px)를 덮어써
+  마우스를 올린 것만으로 키가 눌린 것처럼 보인다.
+*/
 .keycap:hover img {
-  transform: translateY(-2px);
+  transform: translateY(calc(var(--key-rest) * 0.78));
 }
 
 .keycap:hover {
@@ -1271,7 +1275,8 @@
   선택된 키는 눌린 상태로 고정.
   .keycap img / :hover img 보다 뒤에 와야 transform 이 덮이지 않는다.
 */
-.keycap.is-active img {
+.keycap.is-active img,
+.keycap.is-active:hover img {
   transform: translateY(var(--key-press));
 }
 
