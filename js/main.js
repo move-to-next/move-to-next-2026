@@ -607,7 +607,94 @@
     );
     if (!wraps.length) return;
 
+    /*
+      모바일은 1열이라 한 페이지에 6개를 쌓으면 세로로 너무 길다.
+      원래 묶음을 기억해 두고 화면 크기에 따라 2개씩 다시 나눈다.
+    */
+    var MOBILE = '(max-width: 767px)';
+    var PER_MOBILE = 2;
+
+    function repaginate(wrap) {
+      var box = wrap.querySelector('.projects__pages');
+      if (!box) return;
+
+      // 최초 1회: 원래 페이지 구성을 보관한다
+      if (!box.__origin) {
+        box.__origin = Array.prototype.map.call(
+          box.querySelectorAll('.projects__page'),
+          function (p) {
+            return Array.prototype.slice.call(p.children);
+          }
+        );
+      }
+
+      var origin = box.__origin;
+      var flat = origin.reduce(function (acc, g) { return acc.concat(g); }, []);
+      var isMobile = window.matchMedia(MOBILE).matches;
+
+      // 이미 원하는 형태면 다시 만들지 않는다
+      var want = isMobile ? Math.ceil(flat.length / PER_MOBILE) : origin.length;
+      if (box.__mobile === isMobile && box.children.length === want) return;
+      box.__mobile = isMobile;
+
+      var groups = isMobile
+        ? flat.reduce(function (acc, item, i) {
+            if (i % PER_MOBILE === 0) acc.push([]);
+            acc[acc.length - 1].push(item);
+            return acc;
+          }, [])
+        : origin;
+
+      box.textContent = '';
+      groups.forEach(function (items) {
+        var page = document.createElement('div');
+        page.className = 'projects__page reveal-group';
+        items.forEach(function (el) { page.appendChild(el); });
+        box.appendChild(page);
+      });
+
+      /*
+        점 개수를 페이지 수에 맞춘다.
+        갤러리가 여러 개지만 점 컨테이너는 공용이므로,
+        지금 보이는 패널의 것만 갱신한다.
+      */
+      var scope = wrap.closest('.projects__inner') || document;
+      var dotBox = scope.querySelector('.projects__dots');
+      if (dotBox && !wrap.hidden) {
+        dotBox.textContent = '';
+        groups.forEach(function (_, i) {
+          var b = document.createElement('button');
+          b.className = 'projects__page-dot' + (i === 0 ? ' is-active' : '');
+          b.type = 'button';
+          b.setAttribute('data-page', String(i));
+          b.setAttribute('aria-label', (i + 1) + '페이지 보기');
+          dotBox.appendChild(b);
+        });
+      }
+    }
+
+    /*
+      페이지네이션은 마크업상 탭 영역 안에 있다(데스크탑 레이아웃 기준).
+      모바일에서는 리스트 아래가 자연스러우므로 위치를 옮긴다.
+    */
+    function relocatePager(wrap) {
+      var scope = wrap.closest('.projects__inner');
+      if (!scope) return;
+      var bar = scope.querySelector('.projects__pagination');
+      var tabs = scope.querySelector('.projects__tabs');
+      if (!bar || !tabs) return;
+
+      if (!bar.__home) bar.__home = tabs;
+
+      var isMobile = window.matchMedia(MOBILE).matches;
+      var target = isMobile ? scope : bar.__home;
+      if (bar.parentElement !== target) target.appendChild(bar);
+    }
+
     wraps.forEach(function (wrap) {
+      repaginate(wrap);
+      relocatePager(wrap);
+
       var pages = Array.prototype.slice.call(
         wrap.querySelectorAll('.projects__page')
       );
@@ -681,6 +768,14 @@
 
       render();
     });
+
+    // 화면 크기가 바뀌면 다시 나눈다 (한 번만 등록)
+    if (!initGalleryPaging.__bound) {
+      initGalleryPaging.__bound = true;
+      window.matchMedia(MOBILE).addEventListener('change', function () {
+        initGalleryPaging();
+      });
+    }
   }
 
   /* ------------------------------------------------------------------------
