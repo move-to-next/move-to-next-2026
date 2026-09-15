@@ -949,6 +949,119 @@
     padding: 16px;
   }
 
+  /* --- 퍼블리싱 상세 모달 --- */
+  /*
+    데스크탑 값(패딩 44/48px, 버튼 14/30px)이 그대로 쓰여
+    좁은 화면에서 여백이 과하고 버튼 글자가 넘쳤다.
+  */
+  .pub-modal {
+    padding: 16px 12px;
+  }
+
+  .pub-modal__scroll {
+    padding: 20px 16px;
+  }
+
+  .pub-modal__title {
+    font-size: 20px;
+    gap: 8px;
+  }
+
+  .pub-modal__badge {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .pub-modal__meta {
+    margin-top: 12px;
+    gap: 4px;
+  }
+
+  .pub-modal__row {
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .pub-modal__body {
+    margin-top: 16px;
+    padding: 14px;
+    gap: 16px;
+    /*
+      1단으로 쌓이므로 좌우 높이를 맞출 필요가 없다.
+      stretch 로 두면 DEVICE 칸이 늘어나 아래가 빈다.
+    */
+    align-items: start;
+  }
+
+  .pub-shot__frame {
+    height: 260px;
+  }
+
+  /*
+    기기 목업 — 겹침 배치는 좁은 화면에서 서로 가려 흐트러진다.
+    흐름 배치로 바꿔 가로로 나란히 놓는다.
+  */
+  /* 라벨 바로 아래 붙도록 (기본은 세로 가운데 정렬) */
+  .pub-shot,
+  .pub-device {
+    justify-content: flex-start;
+  }
+
+  .pub-device__stage {
+    height: auto;
+    /* 1023px 구간의 min-height:260px 가 남아 위쪽이 빈다 */
+    min-height: 0;
+    max-height: none;
+    margin-block: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .pub-device__pc,
+  .pub-device__tablet,
+  .pub-device__mobile {
+    position: static;
+    translate: none;
+    inset: auto;
+  }
+
+  .pub-device__pc {
+    width: 56%;
+  }
+
+  .pub-device__tablet {
+    width: 26%;
+  }
+
+  .pub-device__mobile {
+    width: 13%;
+  }
+
+  /* 버튼 — 글자가 넘치지 않게 */
+  .pub-modal__foot {
+    margin-top: 16px;
+    gap: 10px;
+  }
+
+  .pub-btn {
+    flex: 1 1 0;
+    display: flex;
+    justify-content: center;
+    /* 기본이 baseline 이라 글자가 아래로 치우쳐 잘린다 */
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 8px;
+    font-size: 13px;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .pub-btn__sub {
+    font-size: 11px;
+  }
+
   /* --- CONTACT --- */
   .contact {
     padding-block: 60px;
