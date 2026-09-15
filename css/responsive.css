@@ -391,7 +391,7 @@
     width: calc(100% + 50px);
     max-width: none;
     height: auto;
-    padding: 11px 14px;
+    padding: 10px;
     border-radius: 10px;
     text-align: left;
     white-space: normal;
@@ -405,7 +405,7 @@
 
   /* 펼친 목록의 줄 간격 */
   .timeline__detail li {
-    line-height: 1.5;
+    line-height: 1.3;
   }
 
   .timeline__detail li + li {

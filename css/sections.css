@@ -1044,7 +1044,7 @@
 /* 업무 목록 — 불릿 있는 리스트 */
 /* 상세 제목 — '교육사항 :' 라벨 + 과정명 */
 .timeline__detail-title {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   font-weight: 700;
   font-size: var(--fs-18);
   letter-spacing: -0.02em;
@@ -1055,7 +1055,7 @@
 .timeline__detail-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0px;
 }
 
 .timeline__detail li {
