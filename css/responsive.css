@@ -628,17 +628,23 @@
 
   .rolling {
     max-width: 100%;
-    height: 60px;
+    height: 64px;
   }
 
+  /*
+    강조 문구인데 주변 텍스트(28px)보다 작아(24px) 묻혔다.
+    조금 더 크게 잡아 무게를 준다.
+  */
   .rolling__list li {
-    height: 60px;
+    height: 64px;
+    font-size: clamp(22px, 7.2vw, 32px);
+    font-weight: 600;
   }
 
   @keyframes rolling {
     0%,   40%  { transform: translateY(0); }
-    50%,  90%  { transform: translateY(-60px); }
-    100%       { transform: translateY(-120px); }
+    50%,  90%  { transform: translateY(-64px); }
+    100%       { transform: translateY(-128px); }
   }
 
   /* --- EXPERIENCE --- */
