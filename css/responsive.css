@@ -579,8 +579,18 @@
   }
 
   /* --- ABOUT --- */
+  /* 롤링 띠 — 위아래가 답답해 보이지 않게 높이를 키운다 */
   .marquee {
-    height: 52px;
+    height: 72px;
+  }
+
+  /*
+    LINK — 데스크탑에서는 margin-top:auto 로 카드 하단에 맞추지만,
+    1단으로 쌓이는 모바일에서는 사진과 과하게 벌어진다.
+  */
+  .about__links {
+    margin-top: 0;
+    padding-top: 22px;
   }
 
   .about__card {
