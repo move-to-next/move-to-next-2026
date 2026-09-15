@@ -426,13 +426,21 @@
       name: 'Photoshop',
       icon: 'assets/images/skills-02.webp',
       rating: 4,
-      points: ['설명을 입력해 주세요.']
+      points: [
+        '제품 상세페이지와 이벤트 배너를 기획부터 디자인까지 직접 제작합니다.',
+        '화보 컷의 누끼 작업과 색보정으로 콘셉트에 맞는 이미지를 완성합니다.',
+        '텍스트에 입체·그라데이션 효과를 적용하고, 슬라이스 분할로 퍼블리싱까지 연결합니다.'
+      ]
     },
     illustrator: {
       name: 'Illustrator',
       icon: 'assets/images/skills-03.webp',
       rating: 3.5,
-      points: ['설명을 입력해 주세요.']
+      points: [
+        'SVG와 인쇄용 파일로 각각 내보내 웹과 인쇄물 모두에 대응합니다.',
+        '패스와 도형을 활용해 도식·인포그래픽 형태의 시각 자료를 만듭니다.',
+        '포토샵 작업물과 연계해 벡터 요소를 추가하고 편집합니다.'
+      ]
     },
     javascript: {
       name: 'JavaScript',
