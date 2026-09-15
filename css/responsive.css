@@ -692,6 +692,13 @@
   .marquee {
     height: auto;
     padding-block: 18px;
+    /*
+      트랙 내용이 컨테이너를 밀어 넓히면 트랙이 화면을 못 채워
+      롤링 도중 빈틈이 생긴다. 폭을 화면에 묶는다.
+    */
+    width: 100%;
+    max-width: 100%;
+    flex: 0 1 auto;
   }
 
   /*
