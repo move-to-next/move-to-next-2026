@@ -553,25 +553,29 @@
     white-space: nowrap;
   }
 
+  /* 모바일에서는 화면이 좁아 마우스를 작게 */
   .hero__mouse {
-    width: 36px;
-    height: 58px;
-    border-width: 4px;
+    width: 24px;
+    height: 38px;
+    border-width: 2px;
   }
 
   .hero__mouse::after {
-    top: 10px;
-    height: 10px;
+    top: 6px;
+    width: 3px;
+    height: 6px;
   }
 
   @keyframes mouse-wheel {
-    0%, 100% { transform: translateY(0);   opacity: 1; }
-    50%      { transform: translateY(10px); opacity: 0.3; }
+    0%, 100% { transform: translateY(0);  opacity: 1; }
+    50%      { transform: translateY(7px); opacity: 0.3; }
   }
 
   .hero__scroll {
-    gap: 8px;
+    gap: 6px;
     bottom: 4%;
+    font-size: 11px;
+    letter-spacing: 0.1em;
   }
 
   /* --- ABOUT --- */
