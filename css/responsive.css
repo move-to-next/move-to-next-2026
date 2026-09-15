@@ -770,6 +770,42 @@
     padding: 24px 20px;
   }
 
+  /*
+    상세 패널 — 데스크탑 값(아이콘 150px, 이름 48px, 좌우 여백 50px)이
+    그대로 쓰여 좁은 화면에서 이름과 별점이 밀려 잘린다.
+  */
+  .skill-detail {
+    gap: 18px;
+    padding: 24px 20px;
+  }
+
+  .skill-detail__head {
+    gap: 16px;
+  }
+
+  .skill-detail__icon {
+    width: 76px;
+    height: 76px;
+  }
+
+  .skill-detail__name {
+    font-size: 26px;
+    word-break: break-all;
+  }
+
+  /* 이름·별점이 아이콘 옆 남는 폭 안에서 줄바꿈되도록 */
+  .skill-detail__head > *:not(.skill-detail__icon) {
+    min-width: 0;
+  }
+
+  .skill-detail__stars {
+    font-size: 20px;
+  }
+
+  .skill-detail__list {
+    font-size: 14px;
+  }
+
   .tool-window {
     padding: 16px;
   }
