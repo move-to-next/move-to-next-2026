@@ -478,7 +478,11 @@
       name: 'Claude',
       icon: 'assets/images/skills-08.webp',
       rating: 4,
-      points: ['설명을 입력해 주세요.']
+      points: [
+        '작업 전 요구사항을 단계별로 정리해 의도한 방향대로 구현되도록 합니다.',
+        '결과물을 그대로 수용하지 않고 직접 검증해 문제를 찾아내고 수정을 요청합니다.',
+        '증상이 아닌 원인을 짚어 코드 구조 자체가 개선되도록 방향을 제시합니다.'
+      ]
     },
     gnuboard: {
       name: 'gnuboard',
