@@ -297,21 +297,37 @@
     padding-left: 50px;
   }
 
+  /*
+    세로 모드 — 선을 점 중심(12px)에 맞춘다.
+    점: left:-50px + 지름 24px, 컨테이너 padding-left:50px 이므로
+    점 중심은 컨테이너 기준 12px.
+  */
   .timeline::before {
-    left: 15px;
+    left: 12px;
     right: auto;
-    top: 10px;
-    bottom: 10px;
-    width: 3px;
+    /* 첫/마지막 점 중심 — JS 가 실측해 넣는다 */
+    top: var(--line-top, 32px);
+    bottom: var(--line-bottom, 32px);
+    width: 2px;
     height: auto;
+    translate: -50% 0;
   }
 
+  /*
+    데스크탑은 3행 그리드(날짜/점/이름)지만 세로 모드에서는
+    점이 왼쪽으로 빠지므로 날짜·이름을 가로로 붙인다.
+    (grid 를 풀지 않으면 가운데 정렬이 남아 오른쪽으로 밀린다)
+  */
   .timeline__item {
+    display: flex;
+    grid-template-rows: none;
     flex-direction: row;
-    align-items: center;
-    gap: 16px;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 10px;
     text-align: left;
     flex-wrap: wrap;
+    justify-items: start;
   }
 
   /* 세로 배치에서는 원(또는 marker 래퍼)을 왼쪽 선 위에 올린다 */

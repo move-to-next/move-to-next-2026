@@ -266,15 +266,28 @@
           })
           .filter(Boolean);
         if (!dots.length) return;
+
         var t = tl.getBoundingClientRect();
         var first = dots[0].getBoundingClientRect();
         var last = dots[dots.length - 1].getBoundingClientRect();
 
-        // 세로: 점의 중심 높이
+        /*
+          가로(데스크탑) 배치는 CSS 가 선을 카드 양 끝까지 그린다.
+          변수를 쓰지 않으므로 남아 있으면 지우기만 한다.
+        */
+        if (getComputedStyle(tl).flexDirection !== 'column') {
+          tl.style.removeProperty('--line-top');
+          tl.style.removeProperty('--line-bottom');
+          return;
+        }
+
+        /*
+          세로(1023px 이하) 배치 — 선이 첫 점 중심에서 시작해
+          마지막 점 중심에서 끝나도록 실측해 넣는다.
+          (고정 px 로는 항목 수·높이에 따라 계속 어긋난다)
+        */
         tl.style.setProperty('--line-top', (first.top + first.height / 2 - t.top) + 'px');
-        // 가로: 첫 점 중심에서 시작해 마지막 점 중심에서 끝난다
-        tl.style.setProperty('--line-left', (first.left + first.width / 2 - t.left) + 'px');
-        tl.style.setProperty('--line-right', (t.right - (last.left + last.width / 2)) + 'px');
+        tl.style.setProperty('--line-bottom', (t.bottom - (last.top + last.height / 2)) + 'px');
       });
     }
 
