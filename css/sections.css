@@ -655,7 +655,7 @@
   gap: 40px;
   padding-right: 40px;
   white-space: nowrap;
-  animation: marquee 18s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
 .marquee__track span {

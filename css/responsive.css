@@ -298,6 +298,11 @@
     padding: 30px;
   }
 
+  /* 트랙이 짧아지는 구간이라 시간도 함께 줄여 체감 속도를 맞춘다 */
+  .marquee__track {
+    animation-duration: 24s;
+  }
+
   /* 타임라인을 세로로 전환 */
   .timeline {
     flex-direction: column;
@@ -689,6 +694,11 @@
     롤링 띠 — align-self:center 때문에 height 가 무시되고
     내용(글자) 높이로 줄어든다. padding 으로 여백을 만든다.
   */
+  /* 모바일은 폭이 좁아 같은 속도면 느려 보인다 */
+  .marquee__track {
+    animation-duration: 18s;
+  }
+
   .marquee {
     height: auto;
     padding-block: 18px;
