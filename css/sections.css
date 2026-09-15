@@ -920,13 +920,10 @@
 .timeline::before {
   content: "";
   position: absolute;
-  /* 첫 점 ~ 마지막 점 중심 (JS 가 실측해 넣는다) */
-  left: var(--line-left, 30px);
-  right: var(--line-right, 30px);
-  /* 점의 세로 중심을 그대로 지난다 (JS 가 실측해 넣는다) */
-  top: var(--line-top, 47px);
+  top: 50%;
+  left: 0;
+  width: 100%;
   height: 3px;
-  translate: 0 -50%;
   background: var(--theme);
   transform: scaleX(0);
   transform-origin: left center;
