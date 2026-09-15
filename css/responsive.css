@@ -303,6 +303,13 @@
     animation-duration: 24s;
   }
 
+  /* 헤더가 낮아지는 구간 — 타이틀 위 여유를 함께 확보 */
+  .section,
+  .contact,
+  #hero {
+    scroll-margin-top: calc(var(--header-h) + 56px);
+  }
+
   /* 타임라인을 세로로 전환 */
   .timeline {
     flex-direction: column;
@@ -1070,6 +1077,13 @@
 
   .pub-btn__sub {
     font-size: 11px;
+  }
+
+  /* 모바일은 타이틀 위에 여유를 더 둔다 */
+  .section,
+  .contact,
+  #hero {
+    scroll-margin-top: calc(var(--header-h) + 56px);
   }
 
   /* --- CONTACT --- */
