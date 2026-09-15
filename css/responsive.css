@@ -1027,6 +1027,16 @@
     inset: auto;
   }
 
+  /*
+    PC 만 있는 경우(뉴발란스) 데스크탑은 left:50% + translate 로
+    가운데 정렬하는데, static 에서는 left 가 무시되고 translate 만
+    남아 왼쪽으로 밀린다.
+  */
+  .pub-device__stage.is-single .pub-device__pc {
+    translate: none;
+    width: 80%;
+  }
+
   .pub-device__pc {
     width: 56%;
   }
