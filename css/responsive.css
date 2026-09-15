@@ -613,6 +613,12 @@
     난간을 피할 수 없다. → 이미지를 확대해 위쪽 하늘만 채운다.
     (width 145% 로 키우고 위쪽 기준 정렬)
   */
+  /* 타이틀을 한 줄로 — 폭에 맞춰 줄인다 */
+  .hero__title {
+    font-size: clamp(26px, 8.6vw, 40px);
+    white-space: nowrap;
+  }
+
   .hero__sky {
     /* 아래로 넘치는 만큼 난간이 화면 밖으로 밀려난다 */
     bottom: -55%;
