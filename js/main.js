@@ -438,25 +438,41 @@
       name: 'JavaScript',
       icon: 'assets/images/skills-04.webp',
       rating: 3.5,
-      points: ['설명을 입력해 주세요.']
+      points: [
+        '이벤트와 메서드를 활용해 필요한 기능을 함수로 구현할 수 있습니다.',
+        'active 클래스를 추가·제거하며 DOM 요소를 동적으로 조작합니다.',
+        'CSS와 연동해 모듈 단위의 동작을 직접 설계하고 작성합니다.'
+      ]
     },
     css: {
       name: 'CSS3',
       icon: 'assets/images/skills-05.webp',
       rating: 4.5,
-      points: ['설명을 입력해 주세요.']
+      points: [
+        '불필요한 class 사용을 최소화해 간결한 스타일 구조를 유지합니다.',
+        'Flexbox와 Grid를 활용해 다양한 디바이스에 대응하는 반응형 웹 제작이 가능합니다.',
+        '재사용을 고려한 스타일 설계로 유지보수가 쉬운 코드를 작성합니다.'
+      ]
     },
     html: {
       name: 'HTML5',
       icon: 'assets/images/skills-06.webp',
       rating: 4.5,
-      points: ['설명을 입력해 주세요.']
+      points: [
+        '마크업 시 웹표준과 웹접근성을 준수합니다.',
+        '용도에 맞는 시멘틱 태그를 사용해 문서 구조를 명확하게 작성합니다.',
+        '구조를 체계적으로 설계해 유지보수를 용이하게 합니다.'
+      ]
     },
     git: {
       name: 'Git',
       icon: 'assets/images/skills-07.webp',
       rating: 3,
-      points: ['설명을 입력해 주세요.']
+      points: [
+        '터미널 프롬프트에서 Git 명령어로 버전 관리가 가능합니다.',
+        '코드 변경 내역을 체계적으로 추적하고 이력을 관리합니다.',
+        '협업 시 발생하는 코드 충돌을 효율적으로 해결합니다.'
+      ]
     },
     claude: {
       name: 'Claude',
