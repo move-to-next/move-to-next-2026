@@ -664,6 +664,7 @@
   font-size: clamp(1.5rem, 2.6vw, calc(46px * var(--fs-scale)));
   color: var(--theme);
   line-height: 1;
+  transform: translateY(1px);
 }
 
 /* 왼쪽 → 오른쪽 흐름 (트랙 2개가 서로를 메운다) */
