@@ -292,7 +292,8 @@
   /* 타임라인을 세로로 전환 */
   .timeline {
     flex-direction: column;
-    gap: 28px;
+    /* 점 사이가 좁아 답답해 보여 간격을 넓힌다 */
+    gap: 40px;
     padding-inline: 0;
     padding-left: 50px;
   }
@@ -360,14 +361,15 @@
   /*
     detail 은 marker(점, left:-50px)의 자식이라 그 기준으로 배치된다.
     marker 는 점 위치를 잡고 있어 기준을 풀 수 없으므로,
-    점에서 오른쪽(50px)·아래(30px)로 역산해 항목 아래에 펼친다.
+    점 오른쪽에 두되 세로는 점 중심에 맞춰 펼친다.
   */
 
   .timeline__item--job:hover .timeline__detail,
   .timeline__item--job:focus-visible .timeline__detail {
-    top: 30px;
-    left: 50px;
-    translate: 0 0;
+    /* marker(24px) 기준 — 세로 중앙에서 양옆으로 펼쳐진다 */
+    top: 50%;
+    left: 38px;
+    translate: 0 -50%;
     width: max-content;
     max-width: min(280px, calc(100vw - 110px));
     height: auto;
