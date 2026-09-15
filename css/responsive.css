@@ -111,9 +111,18 @@
     height: 96px;
   }
 
-  /* 패널 내부는 absolute 이므로 높이를 고정해 둔다 */
+  /*
+    내용 길이가 스킬마다 달라(3~5줄) 고정 높이면 아래가 휑하다.
+    보이는 패널만 흐름에 넣어 높이를 내용에 맞춘다.
+    (숨은 패널은 hidden 이라 display:none 이므로 겹치지 않는다)
+  */
   .skills__panel {
-    height: 500px;
+    height: auto;
+    min-height: 280px;
+  }
+
+  .skills__panel > [data-panel] {
+    position: static;
   }
 
   /* 화살표를 세로 방향으로 회전 */
