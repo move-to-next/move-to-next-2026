@@ -492,13 +492,65 @@
   .section-title > .section-title__handles::after  { bottom: -7px; right: -7px; }
 
   /* --- HERO --- */
+  /* --- HERO --- */
+
+  /*
+    하늘 이미지(2200x3300)는 하단 30% 가 난간이다.
+    모바일은 화면이 세로로 길어 cover 로는 이미지 전체가 들어와
+    난간을 피할 수 없다. → 이미지를 확대해 위쪽 하늘만 채운다.
+    (width 145% 로 키우고 위쪽 기준 정렬)
+  */
+  .hero__sky {
+    /* 아래로 넘치는 만큼 난간이 화면 밖으로 밀려난다 */
+    bottom: -55%;
+  }
+
+  .hero__sky img {
+    object-position: 50% 0%;
+  }
+
+  /*
+    구름이 vw 기준이라 모바일에서 과하게 작아진다.
+    폭을 키우고 높이를 서로 다르게 흩어 인위적인 배치를 피한다.
+  */
+  .hero__cloud--near {
+    --w: 130vw;
+    bottom: -14%;
+    opacity: 0.8;
+  }
+
+  .hero__cloud--mid {
+    --w: 150vw;
+    top: 52%;
+    opacity: 0.5;
+  }
+
+  .hero__cloud--far {
+    --w: 115vw;
+    top: 4%;
+    opacity: 0.35;
+  }
+
+  /* 로고 — 기본 120px 은 모바일에서 과하다 */
+  .site-header__logo {
+    width: 82px;
+  }
+  /*
+    한 줄 유지 — 문구가 길어 vw 기준으로 글자를 줄인다.
+    (430px 기준 약 11px)
+  */
   .hero__lead {
-    display: block;
-    padding: 14px 20px;
-    line-height: 1.5;
-    /* inline-flex 상태로 줄바꿈되면 단어 사이가 벌어지므로 block 으로 전환 */
+    display: inline-flex;
+    padding: 12px 16px;
+    line-height: 1.4;
     text-align: center;
-    word-break: keep-all;
+    font-size: clamp(9px, 2.6vw, 15px);
+    letter-spacing: -0.04em;
+    max-width: calc(100% - 16px);
+  }
+
+  .hero__lead-text {
+    white-space: nowrap;
   }
 
   .hero__mouse {
