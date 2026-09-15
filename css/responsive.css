@@ -342,6 +342,19 @@
     폭을 잡을 수 없다. marker 는 흐름에서 빼되 기준은 만들지 않고,
     점 이미지만 왼쪽에 고정한다.
   */
+  /* hover 중인 항목을 다음 카드보다 위로 올린다 */
+  .timeline__item--job:hover,
+  .timeline__item--job:focus-visible {
+    position: relative;
+    z-index: 30;
+  }
+
+  .experience__card:has(.timeline__item--job:hover),
+  .experience__card:has(.timeline__item--job:focus-visible) {
+    position: relative;
+    z-index: 20;
+  }
+
   .timeline__marker {
     position: static;
     /* 흐름에서 폭을 차지하지 않게 — 날짜·회사명이 벌어지지 않는다 */
@@ -391,6 +404,11 @@
     width: calc(100% + 50px);
     max-width: none;
     height: auto;
+    /*
+      마지막 항목의 박스는 카드 밖으로 넘쳐 다음 카드에 가린다.
+      항목 자체에 쌓임 맥락을 만들고 박스를 그 위로 올린다.
+    */
+    z-index: 30;
     padding: 10px;
     border-radius: 10px;
     text-align: left;
