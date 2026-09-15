@@ -293,7 +293,7 @@
   .timeline {
     flex-direction: column;
     /* 점 사이가 좁아 답답해 보여 간격을 넓힌다 */
-    gap: 40px;
+    gap: 56px;
     padding-inline: 0;
     padding-left: 50px;
   }
@@ -337,11 +337,24 @@
     height: 24px;
   }
 
-  .timeline__item > .timeline__dot,
+  /*
+    marker 를 absolute 로 두면 그 안의 상세 박스가 24px 기준이 되어
+    폭을 잡을 수 없다. marker 는 흐름에서 빼되 기준은 만들지 않고,
+    점 이미지만 왼쪽에 고정한다.
+  */
   .timeline__marker {
+    position: static;
+    /* 흐름에서 폭을 차지하지 않게 — 날짜·회사명이 벌어지지 않는다 */
+    width: 0;
+    height: 0;
+    order: -1;
+  }
+
+  .timeline__item > .timeline__dot,
+  .timeline__marker > .timeline__dot {
     position: absolute;
     left: -50px;
-    /* 항목 세로 중앙에 고정 — 점이 컨테이너 밖으로 나가지 않는다 */
+    /* 항목 세로 중앙에 고정 */
     top: 50%;
     translate: 0 -50%;
     width: 24px;
@@ -366,12 +379,17 @@
 
   .timeline__item--job:hover .timeline__detail,
   .timeline__item--job:focus-visible .timeline__detail {
-    /* marker(24px) 기준 — 세로 중앙에서 양옆으로 펼쳐진다 */
+    /*
+      marker(점, 왼쪽 -50px) 기준이다.
+      점에서 왼쪽으로 50px 되돌리면 타임라인 왼쪽 끝,
+      거기서 카드 안쪽 폭 전체를 채운다.
+    */
+    /* .timeline__item 기준 — 왼쪽 끝부터 항목 폭 전체 */
     top: 50%;
-    left: 38px;
+    left: -50px;
     translate: 0 -50%;
-    width: max-content;
-    max-width: min(280px, calc(100vw - 110px));
+    width: calc(100% + 50px);
+    max-width: none;
     height: auto;
     padding: 11px 14px;
     border-radius: 10px;
