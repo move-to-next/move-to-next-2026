@@ -2524,3 +2524,53 @@
   grid-template-columns: repeat(3, minmax(0, 290px));
   justify-content: center;
 }
+
+
+/* ==========================================================================
+   ABOUT 타이틀 — 디자인 툴 크기 조절 느낌의 등장
+
+   작은 상태에서 원래 크기로 커진다.
+   핸들(모서리 사각형)은 함께 커지면 "크기 조절" 느낌이 사라지므로
+   역배율을 걸어 크기를 유지한다.
+   ========================================================================== */
+
+.about__head .section-title {
+  /* 확대 기준점을 왼쪽 중앙으로 — 왼쪽 정렬을 유지한 채 커진다 */
+  transform-origin: left center;
+}
+
+.about__head .section-title {
+  transform: scale(1);
+  transition: transform 900ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+/* 등장 전 — 작은 상태 (기본 선언보다 뒤에 와야 적용된다) */
+.about__head.reveal:not(.is-visible) .section-title {
+  transform: scale(0.72);
+}
+
+/*
+  핸들 역보정 — 박스가 0.72배일 때 핸들은 1/0.72 배로 키워
+  화면상 크기가 변하지 않게 한다.
+*/
+.about__head .section-title::before,
+.about__head .section-title::after,
+.about__head .section-title > .section-title__handles::before,
+.about__head .section-title > .section-title__handles::after {
+  transition: scale 900ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+.about__head.reveal:not(.is-visible) .section-title::before,
+.about__head.reveal:not(.is-visible) .section-title::after,
+.about__head.reveal:not(.is-visible) .section-title > .section-title__handles::before,
+.about__head.reveal:not(.is-visible) .section-title > .section-title__handles::after {
+  scale: 1.389; /* 1 / 0.72 */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__head .section-title,
+  .about__head.reveal:not(.is-visible) .section-title {
+    transform: none;
+    transition: none;
+  }
+}
