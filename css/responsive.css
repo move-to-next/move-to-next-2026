@@ -1365,4 +1365,53 @@
     align-items: flex-start;
   }
 
+  /* --- ABOUT --- */
+  /* 타이틀과 롤링 띠를 가로로 (PC 와 같은 배치) */
+  .about__head {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 28px;
+  }
+
+  .about__head .section-title {
+    align-self: center;
+    flex-shrink: 0;
+  }
+
+  /* --- HERO --- */
+  /*
+    구름이 데스크탑 값(62~72vw)이라 화면 대비 작아 보인다.
+    폭을 키우고 높이를 서로 달리해 흩어 놓는다.
+  */
+  .hero__cloud--near {
+    --w: 95vw;
+    bottom: -10%;
+    opacity: 0.8;
+  }
+
+  .hero__cloud--mid {
+    --w: 110vw;
+    top: 54%;
+    opacity: 0.5;
+  }
+
+  .hero__cloud--far {
+    --w: 85vw;
+    top: 6%;
+    opacity: 0.35;
+  }
+
+  /*
+    하늘 이미지(2200x3300)는 하단 30% 가 난간이다.
+    가운데(50%) 기준이면 아래로 치우쳐 난간이 들어오므로
+    위쪽 기준으로 잡고, 세로로 긴 화면을 위해 아래로 조금 확장한다.
+  */
+  .hero__sky {
+    bottom: -18%;
+  }
+
+  .hero__sky img {
+    object-position: 50% 0%;
+  }
+
 }
