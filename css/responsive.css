@@ -1305,4 +1305,45 @@
     margin: 0;
     white-space: nowrap;
   }
+  /* 좌측 섹션 이동 버튼 — 태블릿에서는 감춘다 */
+  .section-dots {
+    display: none;
+  }
+
+  /* --- ABOUT 롤링 띠 --- */
+  /*
+    height 는 align-self:center 때문에 무시된다. padding 으로 높이를 만든다.
+    폭을 묶지 않으면 트랙 길이만큼 컨테이너가 늘어나 롤링에 빈틈이 생긴다.
+  */
+  .marquee {
+    height: auto;
+    padding-block: 20px;
+    width: 100%;
+    max-width: 100%;
+    flex: 0 1 auto;
+  }
+
+  .marquee__track span {
+    font-size: 30px;
+  }
+
+  /* --- 프로필 + LINK --- */
+  /* 사진 왼쪽, LINK 오른쪽으로 두되 전체를 가운데에 */
+  .about__aside {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+
+  .about__profile {
+    width: 300px;
+    flex-shrink: 0;
+  }
+
+  .about__links {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
 }
