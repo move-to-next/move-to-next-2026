@@ -787,6 +787,21 @@
     100%       { transform: translateY(-128px); }
   }
 
+  /* 회사명·교육기관명을 키워 날짜보다 눈에 띄게 */
+  .timeline__name {
+    font-size: 19px;
+  }
+
+  /* 상세 박스 본문은 조금 줄인다 */
+  .timeline__detail li {
+    font-size: 14px;
+  }
+
+  /* CAREER / EDUCATION / LICENCE 카드 사이 간격 */
+  .experience__grid {
+    gap: 40px;
+  }
+
   /* 캡슐 타이틀 — 여백이 과해 줄인다 */
   .pill-label {
     height: 44px;
