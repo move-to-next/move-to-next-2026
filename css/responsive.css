@@ -561,6 +561,101 @@
     top: 0;
     translate: 0 0;
   }
+
+  /* ------------------------------------------------------------------
+     태블릿 배치 — 모바일과 같은 구조로 맞춘다 (텍스트 크기는 유지)
+     ------------------------------------------------------------------ */
+
+  /* 카드 모서리 */
+  :root {
+    --radius-card: 12px;
+  }
+
+  /* 앵커 이동 시 헤더에 가리지 않게 */
+  .section,
+  .contact,
+  #hero {
+    scroll-margin-top: calc(var(--header-h) - 1px);
+  }
+
+  /* --- EXPERIENCE --- */
+  /* 캡슐과 한글 설명을 위아래로 */
+  .experience__head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* 카드 사이 간격과 하단 여백 */
+  .experience__grid {
+    gap: 40px;
+  }
+
+  .experience__card {
+    padding: 30px 30px 44px;
+  }
+
+  /* 상세 박스 항목을 2열로 (폭에 여유가 있다) */
+  .timeline__detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 24px;
+  }
+
+  /* --- SKILLS --- */
+  /* 설명 길이에 따라 높이를 맞춘다 */
+  .skills__panel {
+    height: auto;
+    min-height: 320px;
+  }
+
+  .skills__panel > [data-panel] {
+    position: static;
+  }
+
+  /* --- PROJECTS --- */
+  /* PREVIEW 를 한 줄 전체로, 탭 둘은 아래에 반씩 */
+  .projects__tabs {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    padding: 0 14px 14px;
+  }
+
+  .projects__tabs-label {
+    flex: 1 0 100%;
+    text-align: center;
+    margin: 0 -14px 4px;
+    border-radius: 0;
+    border-bottom: 2px solid var(--theme);
+  }
+
+  .tab {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  /* 조작부는 리스트 아래로 */
+  .projects__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .projects__tabs {
+    order: 1;
+  }
+
+  .projects__gallery {
+    order: 2;
+  }
+
+  .projects__pagination {
+    order: 3;
+    justify-content: center;
+    padding: 4px 0 18px;
+    margin: 0;
+  }
 }
 
 /* --------------------------------------------------------------------------

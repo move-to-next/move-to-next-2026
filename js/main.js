@@ -612,6 +612,8 @@
       원래 묶음을 기억해 두고 화면 크기에 따라 2개씩 다시 나눈다.
     */
     var MOBILE = '(max-width: 767px)';
+    // 조작부(페이지네이션) 위치는 태블릿까지 리스트 아래로 내린다
+    var NARROW = '(max-width: 1023px)';
     var PER_MOBILE = 2;
 
     function repaginate(wrap) {
@@ -695,8 +697,8 @@
 
       if (!bar.__home) bar.__home = tabs;
 
-      var isMobile = window.matchMedia(MOBILE).matches;
-      var target = isMobile ? scope : bar.__home;
+      var isNarrow = window.matchMedia(NARROW).matches;
+      var target = isNarrow ? scope : bar.__home;
       if (bar.parentElement !== target) target.appendChild(bar);
     }
 
@@ -806,8 +808,10 @@
     // 화면 크기가 바뀌면 다시 나눈다 (한 번만 등록)
     if (!initGalleryPaging.__bound) {
       initGalleryPaging.__bound = true;
-      window.matchMedia(MOBILE).addEventListener('change', function () {
-        initGalleryPaging();
+      [MOBILE, NARROW].forEach(function (q) {
+        window.matchMedia(q).addEventListener('change', function () {
+          initGalleryPaging();
+        });
       });
     }
   }
