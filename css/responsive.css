@@ -707,9 +707,9 @@
   }
 
   /* --- ABOUT --- */
-  /* 앞 문구(28px)보다 작게 — 한 줄 유지 */
   .about__role {
-    font-size: 23px;
+    font-size: 28px;
+    white-space: nowrap;
   }
 
   /*
