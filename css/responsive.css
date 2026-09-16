@@ -608,6 +608,9 @@
     gap: 6px 24px;
     align-items: start;
     align-content: start;
+    /* 내용이 박스보다 좁을 때 가운데로 몰리지 않게 */
+    justify-content: start;
+    justify-items: start;
     width: max-content;
     max-width: 100%;
   }
