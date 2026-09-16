@@ -601,6 +601,15 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 6px 24px;
+    /* flex-start 는 grid 에서 무시된다 — 행 위쪽에 맞춘다 */
+    align-items: start;
+    align-content: start;
+  }
+
+  /* 항목마다 붙는 여백이 행 높이를 어긋나게 한다 */
+  .timeline__detail li,
+  .timeline__detail li + li {
+    margin: 0;
   }
 
   /* --- SKILLS --- */
