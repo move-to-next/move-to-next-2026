@@ -596,20 +596,26 @@
     padding: 30px 30px 44px;
   }
 
-  /* 상세 박스 항목을 2열로 (폭에 여유가 있다) */
-  .timeline__detail {
+  /*
+    항목이 3개 이상일 때만 2열로 나눈다.
+    위에서 아래로 채운 뒤 다음 열로 넘어가 1·2번이 왼쪽, 3번이 오른쪽.
+    (2개짜리는 기존 1열 유지)
+  */
+  .timeline__detail:has(li:nth-child(3)) {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, auto);
+    grid-auto-flow: column;
     gap: 6px 24px;
-    /* flex-start 는 grid 에서 무시된다 — 행 위쪽에 맞춘다 */
     align-items: start;
     align-content: start;
+    width: max-content;
+    max-width: 100%;
   }
 
-  /* 항목마다 붙는 여백이 행 높이를 어긋나게 한다 */
-  .timeline__detail li,
-  .timeline__detail li + li {
+  /* 자동 줄바꿈으로 단어가 끊겨 보기 흉하다 */
+  .timeline__detail:has(li:nth-child(3)) li {
     margin: 0;
+    white-space: nowrap;
   }
 
   /* --- SKILLS --- */
