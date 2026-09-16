@@ -313,8 +313,8 @@
   /* 타임라인을 세로로 전환 */
   .timeline {
     flex-direction: column;
-    /* 점 사이가 좁아 답답해 보여 간격을 넓힌다 */
-    gap: 72px;
+    /* 항목 사이 간격 */
+    gap: 52px;
     padding-inline: 0;
     padding-left: 50px;
   }
@@ -820,8 +820,9 @@
   }
 
   /* --- EXPERIENCE --- */
+  /* 마지막 항목 아래가 답답해 하단 여백을 더 준다 */
   .experience__card {
-    padding: 24px 20px;
+    padding: 24px 20px 40px;
   }
 
   /* 라벨 옆 문구가 두 줄로 접히므로 아래로 내린다 */
