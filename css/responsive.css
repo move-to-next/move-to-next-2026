@@ -707,6 +707,11 @@
   }
 
   /* --- ABOUT --- */
+  /* 앞 문구(28px)보다 작게 — 한 줄 유지 */
+  .about__role {
+    font-size: 23px;
+  }
+
   /*
     롤링 띠 — align-self:center 때문에 height 가 무시되고
     내용(글자) 높이로 줄어든다. padding 으로 여백을 만든다.
