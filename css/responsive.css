@@ -1361,6 +1361,8 @@
   .about__links {
     margin-top: 0;
     padding-top: 0;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
 }
