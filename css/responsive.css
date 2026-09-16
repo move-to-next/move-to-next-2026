@@ -783,6 +783,23 @@
     100%       { transform: translateY(-128px); }
   }
 
+  /* 캡슐 타이틀 — 여백이 과해 줄인다 */
+  .pill-label {
+    height: 44px;
+    padding-inline: 16px;
+    gap: 10px;
+  }
+
+  .pill-label img {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* 캡슐 아래 한글 설명 — 키운다 */
+  .experience__head-kr {
+    font-size: 21px;
+  }
+
   /* --- EXPERIENCE --- */
   .experience__card {
     padding: 24px 20px;
