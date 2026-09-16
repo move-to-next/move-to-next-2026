@@ -1327,11 +1327,28 @@
     font-size: 30px;
   }
 
+  /* 파란 롤링 박스 — 글자를 키운다 */
+  .rolling {
+    height: 92px;
+  }
+
+  .rolling__list li {
+    height: 92px;
+    font-size: 32px;
+  }
+
+  @keyframes rolling {
+    0%,   40%  { transform: translateY(0); }
+    50%,  90%  { transform: translateY(-92px); }
+    100%       { transform: translateY(-184px); }
+  }
+
   /* --- 프로필 + LINK --- */
   /* 사진 왼쪽, LINK 오른쪽으로 두되 전체를 가운데에 */
   .about__aside {
     flex-direction: row;
-    align-items: center;
+    /* 사진 아래쪽 선에 LINK 를 맞춘다 */
+    align-items: flex-end;
     justify-content: center;
     gap: 36px;
   }
