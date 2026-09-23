@@ -1224,6 +1224,8 @@
       if (!status) return;
       status.textContent = text;
       status.classList.toggle('is-error', !!isError);
+      // 내용이 있을 때만 자리를 차지한다
+      status.classList.toggle('is-shown', !!text);
     }
 
     form.addEventListener('submit', function (e) {

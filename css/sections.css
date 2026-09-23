@@ -2758,9 +2758,11 @@
 /* 버튼 묶음 — 왼쪽 칸 아래에 놓는다 */
 .contact-form__foot {
   grid-column: 1;
-  display: flex;
-  flex-direction: column;
-  gap: calc(10px * var(--fs-scale));
+  /*
+    flex 로 두면 자식의 inline-block 이 block 으로 바뀐다.
+    세로로 쌓기만 하면 되므로 일반 블록 흐름을 쓴다.
+  */
+  display: block;
 }
 
 .contact-form__submit {
@@ -2791,12 +2793,17 @@
   transform: none;
 }
 
-/* 전송 결과 안내 */
+/* 전송 결과 안내 — 결과가 있을 때만 자리를 차지한다 */
 .contact-form__status {
-  min-height: 1.4em;
+  display: none;
   font-size: calc(15px * var(--fs-scale));
   letter-spacing: -0.02em;
   color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-form__status.is-shown {
+  display: inline-block;
+  margin-top: calc(10px * var(--fs-scale));
 }
 
 .contact-form__status.is-error {
