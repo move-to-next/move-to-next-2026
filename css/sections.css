@@ -2801,3 +2801,16 @@
 .contact-form__status.is-error {
   color: #ffb4b4;
 }
+
+
+/* 푸터 아래 안내 — 저작권 줄보다 작고 옅게 */
+.site-footer__note {
+  position: relative;
+  z-index: 1;
+  margin-top: calc(10px * var(--fs-scale));
+  text-align: center;
+  font-size: calc(14px * var(--fs-scale));
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.5);
+}
