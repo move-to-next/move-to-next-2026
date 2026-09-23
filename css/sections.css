@@ -1746,7 +1746,7 @@
   position: relative;
   padding-block: 70px;
   /* 메뉴로 이동했을 때 헤더 아래로 여유를 두고 멈춘다 */
-  scroll-margin-top: calc(var(--header-h) + 12px);
+  scroll-margin-top: calc(var(--header-h) + 2px);
   overflow: hidden;
   color: var(--c-white);
   /* 이미지 로드 전에도 어두운 배경이 보이도록 */
