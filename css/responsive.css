@@ -1224,15 +1224,34 @@
   }
 
   /* --- CONTACT --- */
-  /* 폼 — 좁은 화면에서는 한 줄에 하나씩 */
+  /* 폼 — 좁은 화면에서는 1단으로 쌓는다 */
   .contact-form {
     margin-top: 32px;
+    grid-template-columns: 1fr;
     gap: 14px;
   }
 
-  .contact-form__row {
-    grid-template-columns: 1fr;
+  .contact-form__col {
     gap: 14px;
+  }
+
+  /* 1단에서는 메시지가 높이를 늘릴 필요가 없다 */
+  .contact-form__col--message,
+  .contact-form__col--message .contact-form__field {
+    height: auto;
+  }
+
+  .contact-form__textarea {
+    min-height: 140px;
+  }
+
+  /* 1단에서는 회사명 → 이메일 → 문의유형 → 메시지 → 버튼 순 */
+  .contact-form__foot {
+    grid-column: auto;
+  }
+
+  .contact-form__submit {
+    align-self: stretch;
   }
 
   .contact-form__input {

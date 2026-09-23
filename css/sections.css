@@ -2650,19 +2650,27 @@
    어두운 배경 위에 놓이므로 입력칸은 반투명 흰색으로 띄운다.
    ========================================================================== */
 
+/* 좌: 짧은 입력 + 버튼 / 우: 메시지 */
 .contact-form {
   margin-top: calc(44px * var(--fs-scale));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: calc(28px * var(--fs-scale));
+  align-items: start;
+  max-width: calc(1100px * var(--fs-scale));
+}
+
+.contact-form__col {
   display: flex;
   flex-direction: column;
   gap: calc(18px * var(--fs-scale));
-  max-width: calc(760px * var(--fs-scale));
+  min-width: 0;
 }
 
-/* 회사명·이메일을 한 줄에 */
-.contact-form__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: calc(18px * var(--fs-scale));
+/* 메시지 칸은 왼쪽 묶음 높이에 맞춰 늘어난다 */
+.contact-form__col--message,
+.contact-form__col--message .contact-form__field {
+  height: 100%;
 }
 
 .contact-form__field {
@@ -2726,7 +2734,9 @@
 
 .contact-form__textarea {
   resize: vertical;
-  min-height: calc(120px * var(--fs-scale));
+  /* 왼쪽 묶음 높이만큼 채운다 */
+  flex: 1;
+  min-height: calc(180px * var(--fs-scale));
   line-height: 1.6;
 }
 
@@ -2742,6 +2752,14 @@
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
+}
+
+/* 버튼 묶음 — 왼쪽 칸 아래에 놓는다 */
+.contact-form__foot {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(10px * var(--fs-scale));
 }
 
 .contact-form__submit {

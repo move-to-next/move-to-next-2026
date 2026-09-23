@@ -783,7 +783,8 @@
             action="https://formspree.io/f/xljdnrgo"
             method="POST"
           >
-            <div class="contact-form__row">
+            <!-- 좌: 짧은 입력 3개 + 버튼 / 우: 메시지 -->
+            <div class="contact-form__col">
               <div class="contact-form__field">
                 <label class="contact-form__label" for="cf-company">회사명</label>
                 <input
@@ -807,36 +808,39 @@
                   required
                 >
               </div>
+
+              <div class="contact-form__field">
+                <label class="contact-form__label" for="cf-type">문의 유형</label>
+                <select class="contact-form__input contact-form__select" id="cf-type" name="문의 유형" required>
+                  <option value="채용 제안">채용 제안</option>
+                  <option value="프로젝트 의뢰">프로젝트 의뢰</option>
+                  <option value="협업 제안">협업 제안</option>
+                  <option value="기타">기타</option>
+                </select>
+              </div>
+
             </div>
 
-            <div class="contact-form__field">
-              <label class="contact-form__label" for="cf-type">문의 유형</label>
-              <select class="contact-form__input contact-form__select" id="cf-type" name="문의 유형" required>
-                <option value="채용 제안">채용 제안</option>
-                <option value="프로젝트 의뢰">프로젝트 의뢰</option>
-                <option value="협업 제안">협업 제안</option>
-                <option value="기타">기타</option>
-              </select>
-            </div>
-
-            <div class="contact-form__field">
-              <label class="contact-form__label" for="cf-message">메시지</label>
-              <textarea
-                class="contact-form__input contact-form__textarea"
-                id="cf-message"
-                name="메시지"
-                rows="5"
-                placeholder="문의하실 내용을 남겨주세요"
-                required
-              ></textarea>
+            <div class="contact-form__col contact-form__col--message">
+              <div class="contact-form__field">
+                <label class="contact-form__label" for="cf-message">메시지</label>
+                <textarea
+                  class="contact-form__input contact-form__textarea"
+                  id="cf-message"
+                  name="메시지"
+                  placeholder="문의하실 내용을 남겨주세요"
+                  required
+                ></textarea>
+              </div>
             </div>
 
             <!-- 스팸 봇이 채우는 함정 필드 — 사람에게는 보이지 않는다 -->
             <input class="contact-form__trap" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-            <button class="contact-form__submit" type="submit">보내기</button>
-
-            <p class="contact-form__status" role="status" aria-live="polite"></p>
+            <div class="contact-form__foot">
+              <button class="contact-form__submit" type="submit">보내기</button>
+              <p class="contact-form__status" role="status" aria-live="polite"></p>
+            </div>
           </form>
 
         </div>
