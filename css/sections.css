@@ -1744,8 +1744,9 @@
 */
 .contact {
   position: relative;
-  /* 위 여백이 크면 메뉴로 이동했을 때 화면이 내려앉는다 */
   padding-block: 70px;
+  /* 메뉴로 이동했을 때 헤더 아래로 여유를 두고 멈춘다 */
+  scroll-margin-top: calc(var(--header-h) + 60px);
   overflow: hidden;
   color: var(--c-white);
   /* 이미지 로드 전에도 어두운 배경이 보이도록 */
