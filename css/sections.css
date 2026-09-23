@@ -1744,7 +1744,8 @@
 */
 .contact {
   position: relative;
-  padding-block: 140px 70px;
+  /* 위 여백이 크면 메뉴로 이동했을 때 화면이 내려앉는다 */
+  padding-block: 70px;
   overflow: hidden;
   color: var(--c-white);
   /* 이미지 로드 전에도 어두운 배경이 보이도록 */
@@ -1777,9 +1778,8 @@
 
 /* 좌측 정렬 1단 — 이메일 주소가 주인공이다 */
 .contact__inner {
-  padding: 60px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 10px;
+  /* 테두리와 안쪽 여백 없이 내용만 흐른다 */
+  padding: 0;
 }
 
 /* CONTACT — 캡슐 테두리를 두른 라벨 */
