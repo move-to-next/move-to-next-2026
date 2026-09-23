@@ -775,6 +775,17 @@
           </div>
 
           <!--
+            전화번호 — 평소에는 감춰 두고 버튼을 누르면 드러난다.
+            수집 봇이 바로 긁어가지 않도록 기본 상태에서는 보이지 않는다.
+          -->
+          <div class="contact__phone-row">
+            <button class="contact__phone-toggle" type="button" aria-expanded="false" aria-controls="contact-phone">
+              <span class="contact__phone-label">PHONE</span>
+            </button>
+            <a class="contact__phone" id="contact-phone" href="tel:01071272914">010-7127-2914</a>
+          </div>
+
+          <!--
             문의 폼 — Formspree 로 전송된다.
             action 주소로 POST 되면 등록된 메일로 내용이 도착한다.
           -->

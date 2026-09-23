@@ -2814,3 +2814,90 @@
   letter-spacing: -0.02em;
   color: rgba(255, 255, 255, 0.5);
 }
+
+
+/* ==========================================================================
+   CONTACT 전화번호
+
+   평소에는 PHONE 버튼만 보이고, 누르면 번호가 흐릿한 상태에서
+   또렷해지며 함께 나타난다. 다시 누르면 역순으로 사라진다.
+   ========================================================================== */
+
+.contact__phone-row {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-top: calc(14px * var(--fs-scale));
+  min-height: calc(34px * var(--fs-scale));
+}
+
+/* 버튼 — COPY 와 같은 모양 */
+.contact__phone-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  color: var(--c-white);
+  font-family: var(--font-en);
+  font-size: var(--fs-16);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    opacity var(--dur-base) var(--ease-out);
+}
+
+.contact__phone-toggle:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/*
+  번호가 드러나면 버튼은 자리만 비우고 사라진다.
+  (자리를 차지한 채 숨기면 번호가 옆으로 밀린다)
+*/
+.contact__phone-row.is-open .contact__phone-toggle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/*
+  번호 — 버튼과 같은 자리에 겹쳐 둔다.
+  blur 와 opacity 를 함께 전환해 흐릿하게 떠오르는 느낌을 준다.
+*/
+.contact__phone {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  translate: 0 -50%;
+  white-space: nowrap;
+  font-family: var(--font-en);
+  font-weight: 500;
+  font-size: calc(24px * var(--fs-scale));
+  letter-spacing: 0.02em;
+  color: var(--c-white);
+  text-decoration: none;
+
+  opacity: 0;
+  filter: blur(8px);
+  pointer-events: none;
+  transition: opacity var(--dur-slow) var(--ease-out),
+    filter var(--dur-slow) var(--ease-out);
+}
+
+.contact__phone-row.is-open .contact__phone {
+  opacity: 1;
+  filter: blur(0);
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__phone {
+    filter: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+}

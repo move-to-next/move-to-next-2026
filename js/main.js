@@ -1165,6 +1165,54 @@
        기본 동작은 Formspree 페이지로 이동한다.
        fetch 로 보내 페이지에 머문 채 결과만 알려준다.
      ------------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------------
+     CONTACT 전화번호 토글
+       PHONE 버튼을 누르면 번호가 흐릿한 상태에서 또렷해지며 나타나고,
+       번호 밖을 누르면 다시 사라진다.
+     ------------------------------------------------------------------------ */
+  function initPhoneToggle() {
+    var row = document.querySelector('.contact__phone-row');
+    if (!row) return;
+
+    var btn = row.querySelector('.contact__phone-toggle');
+    var tel = row.querySelector('.contact__phone');
+    if (!btn || !tel) return;
+
+    function open() {
+      row.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+
+    function close() {
+      row.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      open();
+    });
+
+    /*
+      번호를 누르면 전화 앱으로 넘어가야 하므로 여기서는 닫지 않는다.
+      바깥을 누르거나 ESC 로만 닫는다.
+    */
+    tel.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+
+    document.addEventListener('click', function () {
+      if (row.classList.contains('is-open')) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && row.classList.contains('is-open')) {
+        close();
+        btn.focus();
+      }
+    });
+  }
+
   function initContactForm() {
     var form = document.querySelector('.contact-form');
     if (!form) return;
@@ -1625,6 +1673,7 @@
     initPubModal();
     initCopy();
     initContactForm();
+    initPhoneToggle();
     initSectionDots();
     initToTop();
     initParallax();
