@@ -2856,6 +2856,13 @@
   border-color: rgba(255, 255, 255, 0.8);
 }
 
+/* 전화기 아이콘 — COPY 아이콘과 크기를 맞춘다 */
+.contact__phone-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
 /*
   번호가 드러나면 버튼은 자리만 비우고 사라진다.
   (자리를 차지한 채 숨기면 번호가 옆으로 밀린다)
