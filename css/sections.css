@@ -1778,8 +1778,9 @@
 
 /* 좌측 정렬 1단 — 이메일 주소가 주인공이다 */
 .contact__inner {
-  /* 테두리와 안쪽 여백 없이 내용만 흐른다 */
-  padding: 0;
+  padding: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
 }
 
 /* CONTACT — 캡슐 테두리를 두른 라벨 */
