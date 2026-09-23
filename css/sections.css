@@ -2642,3 +2642,144 @@
     transition: none;
   }
 }
+
+
+/* ==========================================================================
+   CONTACT 문의 폼
+
+   어두운 배경 위에 놓이므로 입력칸은 반투명 흰색으로 띄운다.
+   ========================================================================== */
+
+.contact-form {
+  margin-top: calc(44px * var(--fs-scale));
+  display: flex;
+  flex-direction: column;
+  gap: calc(18px * var(--fs-scale));
+  max-width: calc(760px * var(--fs-scale));
+}
+
+/* 회사명·이메일을 한 줄에 */
+.contact-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(18px * var(--fs-scale));
+}
+
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--fs-scale));
+  min-width: 0;
+}
+
+.contact-form__label {
+  font-weight: 500;
+  font-size: calc(15px * var(--fs-scale));
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.contact-form__input {
+  width: 100%;
+  padding: calc(14px * var(--fs-scale)) calc(16px * var(--fs-scale));
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: calc(8px * var(--fs-scale));
+  color: var(--c-white);
+  font-family: inherit;
+  font-size: calc(16px * var(--fs-scale));
+  letter-spacing: -0.02em;
+  transition: border-color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.contact-form__input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.contact-form__input:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.contact-form__input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+/* 드롭다운 — 기본 화살표를 지우고 직접 그린다 */
+.contact-form__select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, rgba(255, 255, 255, 0.7) 50%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.7) 50%, transparent 50%);
+  background-position: calc(100% - 22px) center, calc(100% - 16px) center;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: calc(44px * var(--fs-scale));
+  cursor: pointer;
+}
+
+/* 펼친 목록은 OS 가 그리므로 대비를 위해 어두운 글자로 */
+.contact-form__select option {
+  color: #111;
+}
+
+.contact-form__textarea {
+  resize: vertical;
+  min-height: calc(120px * var(--fs-scale));
+  line-height: 1.6;
+}
+
+/*
+  스팸 함정 — 봇만 채우도록 사람에게는 완전히 숨긴다.
+  display:none 은 일부 봇이 건너뛰므로 화면 밖으로 밀어낸다.
+*/
+.contact-form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact-form__submit {
+  align-self: flex-start;
+  margin-top: calc(4px * var(--fs-scale));
+  padding: calc(15px * var(--fs-scale)) calc(44px * var(--fs-scale));
+  background: var(--c-white);
+  border: 0;
+  border-radius: var(--radius-pill);
+  color: #111;
+  font-family: var(--font-kr);
+  font-weight: 700;
+  font-size: calc(16px * var(--fs-scale));
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: opacity var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.contact-form__submit:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.contact-form__submit:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+}
+
+/* 전송 결과 안내 */
+.contact-form__status {
+  min-height: 1.4em;
+  font-size: calc(15px * var(--fs-scale));
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-form__status.is-error {
+  color: #ffb4b4;
+}

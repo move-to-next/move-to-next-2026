@@ -1160,6 +1160,59 @@
   /* ------------------------------------------------------------------------
      복사 버튼 (CONTACT 이메일)
      ------------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------------
+     CONTACT 문의 폼
+       기본 동작은 Formspree 페이지로 이동한다.
+       fetch 로 보내 페이지에 머문 채 결과만 알려준다.
+     ------------------------------------------------------------------------ */
+  function initContactForm() {
+    var form = document.querySelector('.contact-form');
+    if (!form) return;
+
+    var status = form.querySelector('.contact-form__status');
+    var submit = form.querySelector('.contact-form__submit');
+
+    function say(text, isError) {
+      if (!status) return;
+      status.textContent = text;
+      status.classList.toggle('is-error', !!isError);
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      submit.disabled = true;
+      say('보내는 중입니다…', false);
+
+      window
+        .fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        })
+        .then(function (res) {
+          if (res.ok) {
+            form.reset();
+            say('보내주셔서 감사합니다. 확인 후 회신드리겠습니다.', false);
+          } else {
+            return res.json().then(function (data) {
+              var msg =
+                data && data.errors
+                  ? data.errors.map(function (x) { return x.message; }).join(' ')
+                  : '전송에 실패했습니다.';
+              say(msg + ' 메일로 직접 보내주셔도 됩니다.', true);
+            });
+          }
+        })
+        .catch(function () {
+          say('전송에 실패했습니다. 메일로 직접 보내주시면 감사하겠습니다.', true);
+        })
+        .then(function () {
+          submit.disabled = false;
+        });
+    });
+  }
+
   function initCopy() {
     var buttons = document.querySelectorAll('[data-copy]');
     if (!buttons.length) return;
@@ -1571,6 +1624,7 @@
     initProjectModal();
     initPubModal();
     initCopy();
+    initContactForm();
     initSectionDots();
     initToTop();
     initParallax();

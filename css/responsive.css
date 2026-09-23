@@ -1224,6 +1224,28 @@
   }
 
   /* --- CONTACT --- */
+  /* 폼 — 좁은 화면에서는 한 줄에 하나씩 */
+  .contact-form {
+    margin-top: 32px;
+    gap: 14px;
+  }
+
+  .contact-form__row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .contact-form__input {
+    padding: 12px 14px;
+    /* 16px 미만이면 iOS 가 입력 시 화면을 확대한다 */
+    font-size: 16px;
+  }
+
+  .contact-form__submit {
+    align-self: stretch;
+    padding: 14px 24px;
+  }
+
   .contact {
     padding-block: 60px;
   }
