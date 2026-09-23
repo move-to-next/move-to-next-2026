@@ -1778,7 +1778,7 @@
 
 /* 좌측 정렬 1단 — 이메일 주소가 주인공이다 */
 .contact__inner {
-  padding: 60px;
+  padding: 40px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 10px;
 }
