@@ -1396,6 +1396,44 @@
   /* ------------------------------------------------------------------------
      맨 위로 버튼
      ------------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------------
+     앵커 부드러운 이동
+       터치 기기에서는 scroll-behavior:smooth 를 꺼 두므로
+       (손가락 스크롤까지 보간돼 끊겨 보인다) 메뉴 이동만 여기서 처리한다.
+     ------------------------------------------------------------------------ */
+  function initSmoothAnchor() {
+    var links = Array.prototype.slice.call(
+      document.querySelectorAll('a[href^="#"]')
+    );
+    if (!links.length) return;
+
+    links.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href');
+        if (!id || id === '#') return;
+
+        var target = document.querySelector(id);
+        if (!target) return;
+
+        e.preventDefault();
+
+        var style = window.getComputedStyle(target);
+        var offset = parseFloat(style.scrollMarginTop) || 0;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: top,
+          behavior: reduceMotion ? 'auto' : 'smooth'
+        });
+
+        // 주소창 기록은 남기되 기본 점프는 막았으므로 직접 갱신
+        if (window.history && window.history.pushState) {
+          window.history.pushState(null, '', id);
+        }
+      });
+    });
+  }
+
   function initToTop() {
     var btn = document.querySelector('.to-top');
     if (!btn) return;
@@ -1676,6 +1714,7 @@
     initPhoneToggle();
     initSectionDots();
     initToTop();
+    initSmoothAnchor();
     initParallax();
   }
 
