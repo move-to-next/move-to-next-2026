@@ -135,6 +135,52 @@ VS Code **Live Server** 확장으로 열어도 동일하게 동작합니다.
 | ~1023px | 햄버거 메뉴, 타임라인 세로 전환 |
 | ~767px | 1단 레이아웃 |
 
+## 전화번호 표시 방식
+
+CONTACT 의 전화번호는 두 가지 상태를 오갈 수 있습니다.
+
+| 상태 | 설명 |
+|---|---|
+| **상시 노출** (현재) | 번호가 처음부터 보입니다 |
+| 버튼 토글 | PHONE 버튼을 눌러야 번호가 흐릿하게 떠오릅니다 |
+
+토글 방식은 번호를 바로 노출하지 않아 수집 봇을 조금 늦출 수 있고,
+상시 노출은 보는 사람이 한 번에 확인할 수 있습니다.
+
+### 토글 방식으로 되돌리기
+
+두 군데만 바꾸면 됩니다. 토글에 필요한 CSS·JS 는 그대로 남아 있습니다.
+
+**1. `index.html`** — `is-open` 과 `aria-expanded` 를 되돌립니다.
+
+```html
+<!-- 지금 -->
+<div class="contact__phone-row is-open">
+  <button class="contact__phone-toggle" type="button" aria-expanded="true" ...>
+
+<!-- 되돌린 뒤 -->
+<div class="contact__phone-row">
+  <button class="contact__phone-toggle" type="button" aria-expanded="false" ...>
+```
+
+위에 붙어 있는 `[임시]` 주석도 함께 지웁니다.
+
+**2. `css/sections.css`** — 파일 맨 아래 `[임시] 전화번호 상시 노출` 블록을 통째로 삭제합니다.
+
+`js/main.js` 의 `initPhoneToggle()` 은 손대지 않습니다.
+
+### 번호를 바꾸려면
+
+`index.html` 한 곳만 고치면 됩니다.
+
+```html
+<a class="contact__phone" id="contact-phone" href="tel:01071272914">010-7127-2914</a>
+```
+
+`href` 의 `tel:` 값(하이픈 없이)과 화면에 보이는 텍스트를 모두 바꿔야 합니다.
+
+---
+
 ---
 
 ## 배포

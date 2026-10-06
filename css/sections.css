@@ -2917,3 +2917,29 @@
     transition: opacity var(--dur-fast) var(--ease-out);
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   [임시] 전화번호 상시 노출
+
+   원래는 PHONE 버튼을 눌러야 번호가 드러난다.
+   지금은 마크업에 is-open 을 미리 붙여 항상 보이게 해 두었고,
+   버튼이 자리만 차지해 번호가 잘리므로 아래 규칙으로 보정한다.
+
+   되돌릴 때: index.html 의 is-open 제거 + 이 블록 삭제.
+   (자세한 내용은 README 의 "전화번호 표시 방식")
+   -------------------------------------------------------------------------- */
+
+.contact__phone-row.is-open {
+  /* 숨은 버튼 크기에 갇히지 않도록 */
+  min-height: 0;
+}
+
+.contact__phone-row.is-open .contact__phone-toggle {
+  display: none;
+}
+
+.contact__phone-row.is-open .contact__phone {
+  position: static;
+  translate: none;
+}
